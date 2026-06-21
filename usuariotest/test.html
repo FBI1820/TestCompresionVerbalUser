@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Comprensión Verbal</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Georama:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pliant:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+  </style>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  </head>
+<body>
+
+  <div class="cronometro-flotante">
+    <span class="material-symbols-outlined" style="color: var(--azul-oscuro);">timer</span>
+    <div class="tiempo-texto" id="displayTiempo">15:00</div>
+    <button type="button" class="btn-toggle-tiempo" id="btnToggleTiempo" title="Ocultar/Mostrar tiempo">
+        <span class="material-symbols-outlined" id="iconoOjo">visibility_off</span>
+    </button>
+  </div>
+
+  <div class="contenedor-test">
+    <div class="cabecera-test">
+      <h1>Test de Comprensión Verbal</h1>
+      <p>Seleccione la interpretación que mejor se adapte a cada frase.</p>
+    </div>
+
+    <div class="instrucciones">
+      <span class="material-symbols-outlined">timer</span>
+      <strong>Dispondrá de 15 minutos.</strong> Procure hacer el máximo de ejercicios trabajando lo más rápidamente que pueda. Todas las preguntas son obligatorias.
+    </div>
+
+    <form id="formularioTest" action="resultados.html" method="get">
+      
+      <div class="pregunta-card">
+        <p class="enunciado">1. A VECES UN GIGANTE NECESITA LOS SERVICIOS DE UN ENANO.</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p1" value="A" required> A. El éxito es a menudo difícil de prever.</label>
+          <label class="opcion-label"><input type="radio" name="p1" value="B"> B. A menudo se tiene necesidad de alguien inferior a uno.</label>
+          <label class="opcion-label"><input type="radio" name="p1" value="C"> C. Dar es una cosa fácil.</label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">2. SI LA TÉCNICA NOS HACE PERDER EL ESPÍRITU, ES QUE NO MERECEMOS CONSERVARLO. (J. ROSTAND)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p2" value="A" required> A. Si no dejamos invadir por la técnica estamos perdidos.</label>
+          <label class="opcion-label"><input type="radio" name="p2" value="B"> B. El espíritu y la técnica son irreconciliables.</label>
+          <label class="opcion-label"><input type="radio" name="p2" value="C"> C. Si el hombre se destruye por la técnica sólo él es responsable de su derrota.</label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">3. Y POR TANTO NO PUEDE HACER NADA PARA LA FELICIDAD DE LOS DEMÁS AQUEL QUE ES INCAPAZ DE SER FELIZ ÉL MISMO. (A. GIDE)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p3" value="A" required> A. La felicidad es lo único que puede darse sin poseerla.</label>
+          <label class="opcion-label"><input type="radio" name="p3" value="B"> B. Toda felicidad es altruista.</label>
+          <label class="opcion-label"><input type="radio" name="p3" value="C"> C. Seamos felices para poder hacer felices a otros.</label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">4. PARA QUÉ PONER ESTA PALABRA EN SINGULAR QUE SE NOS ESCAPA, SI PUESTA EN PLURAL LA ENCONTRAMOS TODOS LOS DÍAS. (COLETTE)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p4" value="A" required> A. El mito de la felicidad absoluta oculta la realidad de las alegrías cotidianas.</label>
+          <label class="opcion-label"><input type="radio" name="p4" value="B"> B. La felicidad es un mito que nos resulta imposible alcanzar.</label>
+          <label class="opcion-label"><input type="radio" name="p4" value="C"> C. Esperemos la felicidad que pueda traernos el mañana.</label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">5. PARA CADA UNO ES BARBARIE AQUELLO QUE NO LE ES FAMILIAR. (MONTAIGNE)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p5" value="A" required> A. El uso define la barbarie como aquello que es propio de un individuo.</label>
+          <label class="opcion-label"><input type="radio" name="p5" value="B"> B. La noción de barbarie es relativa en cada civilización.</label>
+          <label class="opcion-label"><input type="radio" name="p5" value="C"> C. La barbarie es difícil de definir.</label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">6. EN UN ACTO TAN COMPLEJO COMO ES EL JUICIO ESTÉTICO DISTINGUIMOS CON DIFICULTAD AQUELLO QUE NOSOTROS APORTAMOS DE LO QUE PROCEDE DE LAS ADQUISICIONES CULTURALES. (J. CHARBONNEAUX)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p6" value="A" required> A. Es difícil separar el juicio personal de la impregnación recibida cuando decimos: "Esto es bonito".</label>
+          <label class="opcion-label"><input type="radio" name="p6" value="B"> B. El juicio estético es complejo ya que pone en juego toda una educación.</label>
+          <label class="opcion-label"><input type="radio" name="p6" value="C"> C. Un ser sin cultura no podrá emitir un juicio estético.</label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">7. RÍE BIEN EL QUE RÍE ÚLTIMO</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p7" value="A" required> A. Es necesario esperar haber pasado la última para conocer el final de la historia.</label>
+          <label class="opcion-label"><input type="radio" name="p7" value="B"> B. A pícaro, pícaro y medio.</label>
+          <label class="opcion-label"><input type="radio" name="p7" value="C"> C. Lo importante es decir la última palabra.</label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">8. UNA GOLONDRINA NO HACE VERANO</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p8" value="A" required> A. Las apariencias no son la realidad.</label>
+          <label class="opcion-label"><input type="radio" name="p8" value="B"> B. De la mano a la boca se pierde la sopa.</label>
+          <label class="opcion-label"><input type="radio" name="p8" value="C"> C. Debe tenerse cuidado con las apariencias, son a menudo engañosas.</label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-finalizar">Finalizar y Ver Resultados</button>
+    </form>
+  </div>
+  
+  <style>
+    :root {
+      --celeste-pastel: #2CACAD; 
+      --celeste-principal: #7ed8ff; 
+      --azul-oscuro: #1C4EA7; 
+      --blanco: #ffffff;
+      --texto-oscuro: #024D60; 
+      --texto-suave: #666666;
+      --fondo-pregunta: #f4fbfb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pliant', sans-serif; }
+
+    body {
+        background-color: var(--celeste-pastel); 
+        display: flex; justify-content: center; align-items: flex-start; 
+        min-height: 100vh; padding: 40px 20px;
+    }
+
+    /* Estilos del Cronómetro Flotante */
+    .cronometro-flotante {
+        position: fixed; top: 20px; right: 20px; background-color: var(--blanco);
+        border: 2px solid var(--azul-oscuro); border-radius: 25px; padding: 10px 20px;
+        display: flex; align-items: center; gap: 15px; box-shadow: 0 5px 15px rgba(28, 78, 167, 0.2);
+        z-index: 1000; font-family: 'Nunito', sans-serif;
+    }
+    .tiempo-texto { font-size: 20px; font-weight: 800; color: var(--azul-oscuro); min-width: 65px; text-align: center; }
+    .btn-toggle-tiempo { background: none; border: none; cursor: pointer; color: var(--texto-suave); display: flex; align-items: center; justify-content: center; transition: color 0.2s; }
+    .btn-toggle-tiempo:hover { color: var(--azul-oscuro); }
+
+    /* Estilos del Contenedor del Test */
+    .contenedor-test {
+        width: 100%; max-width: 800px; background-color: var(--blanco);
+        border-radius: 35px; padding: 50px 40px; box-shadow: 0 15px 35px rgba(28, 78, 167, 0.15); 
+        margin-top: 60px; /* Margen para que no choque con el cronómetro */
+    }
+
+    .cabecera-test { text-align: center; margin-bottom: 40px; border-bottom: 2px dashed var(--celeste-pastel); padding-bottom: 20px; }
+    .cabecera-test h1 { font-family: 'Nunito', sans-serif; color: var(--azul-oscuro); font-size: 32px; font-weight: 900; margin-bottom: 10px; }
+    .cabecera-test p { font-family: 'Georama', sans-serif; color: var(--texto-suave); font-size: 16px; }
+    .instrucciones { background-color: #fff3cd; color: #856404; padding: 15px; border-radius: 15px; margin-bottom: 30px; font-family: 'Lato', sans-serif; font-size: 15px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    
+    /* Estilos de las preguntas */
+    .pregunta-card { background-color: var(--fondo-pregunta); border: 1px solid rgba(44, 172, 173, 0.2); border-radius: 20px; padding: 25px; margin-bottom: 25px; transition: transform 0.2s ease; }
+    .pregunta-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(44, 172, 173, 0.1); }
+    .enunciado { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 17px; color: var(--texto-oscuro); margin-bottom: 15px; line-height: 1.4; }
+    .opciones { display: flex; flex-direction: column; gap: 12px; }
+    .opcion-label { display: flex; align-items: flex-start; gap: 10px; font-family: 'Lato', sans-serif; font-size: 16px; color: var(--texto-suave); cursor: pointer; padding: 8px; border-radius: 10px; transition: background-color 0.2s; }
+    .opcion-label:hover { background-color: rgba(44, 172, 173, 0.1); color: var(--texto-oscuro); }
+    .opcion-label input[type="radio"] { margin-top: 4px; accent-color: var(--azul-oscuro); transform: scale(1.2); }
+    
+    .btn-finalizar { font-family: 'Sour Gummy', sans-serif; background-color: var(--azul-oscuro); color: white; border: none; padding: 18px 40px; font-size: 1.2rem; font-weight: bold; border-radius: 30px; cursor: pointer; transition: all 0.2s ease; display: block; width: 100%; margin-top: 40px; }
+    .btn-finalizar:hover { background-color: #12367a; box-shadow: 0 8px 20px rgba(28, 78, 167, 0.3); }
+    .btn-finalizar:active { transform: scale(0.98); }
+  </style>
+
+
+  <script>
+    let tiempoRestante = 15 * 60; // 15 minutos en segundos
+    const displayTiempo = document.getElementById('displayTiempo');
+    const btnToggle = document.getElementById('btnToggleTiempo');
+    const iconoOjo = document.getElementById('iconoOjo');
+    let tiempoOculto = false;
+
+    // Actualizar el texto del reloj
+    function actualizarDisplay() {
+        const minutos = Math.floor(tiempoRestante / 60);
+        let segundos = tiempoRestante % 60;
+        if (segundos < 10) segundos = '0' + segundos;
+
+        if (tiempoOculto) {
+            displayTiempo.innerText = "--:--";
+        } else {
+            displayTiempo.innerText = `${minutos}:${segundos}`;
+        }
+    }
+
+    // Ocultar/mostrar cronómetro
+    btnToggle.addEventListener('click', () => {
+        tiempoOculto = !tiempoOculto;
+        iconoOjo.innerText = tiempoOculto ? 'visibility' : 'visibility_off';
+        actualizarDisplay();
+    });
+
+    // Cuenta regresiva
+    const intervalo = setInterval(() => {
+        tiempoRestante--;
+        actualizarDisplay();
+
+        if (tiempoRestante <= 0) {
+            clearInterval(intervalo);
+            alert("El tiempo ha concluido. El formulario se enviará automáticamente.");
+            document.getElementById('formularioTest').submit(); 
+        }
+    }, 1000);
+
+    // Evitar envío por defecto si faltan datos y redirigir a resultados
+    document.getElementById('formularioTest').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        window.location.href = 'resultados.html'; 
+    });
+  </script>
+
+</body>
+</html>
