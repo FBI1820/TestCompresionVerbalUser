@@ -1,0 +1,302 @@
+/* Importamos TODAS las fuentes desde Google Fonts en una sola línea */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Georama:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pliant:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Aplicamos Pliant como fuente principal */
+    font-family: 'Pliant', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    /* Fondo con degradado corregido */
+    background: linear-gradient(135deg, #D9F5F0 0%, #BFEFF2 100%);
+    color: #024D60; /* Midnight Green para texto principal */
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.home-container {
+    display: flex;
+    max-width: 1100px;
+    min-height: 80vh;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(2, 77, 96, 0.1);
+    overflow: hidden;
+    padding: 50px;
+    align-items: center;
+    gap: 50px;
+}
+
+.home-content {
+    flex: 1.2;
+}
+
+.badge {
+    background-color: rgba(44, 172, 173, 0.15);
+    color: #024D60;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.home-title {
+    font-family: 'Nunito', sans-serif; /* Aplicamos Nunito */
+    font-size: 2.6rem;
+    color: #1C4EA7; 
+    line-height: 1.2;
+    margin: 20px 0;
+    font-weight: 900; /* Heavy */
+}
+
+.home-subtitle {
+    font-size: 1.15rem;
+    color: #024D60;
+    margin-bottom: 35px;
+    opacity: 0.9;
+}
+
+.register-form {
+    background: #D9F5F0; 
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(44, 172, 173, 0.3);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #1C4EA7; 
+    font-size: 0.95rem;
+}
+
+.input-group input {
+    padding: 12px 15px;
+    border: 2px solid #75E2E0; 
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #024D60;
+    background-color: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #1C4EA7; 
+    box-shadow: 0 0 0 3px rgba(28, 78, 167, 0.15);
+    outline: none;
+}
+
+.btn-start {
+    width: 100%;
+    font-family: 'Sour Gummy', sans-serif; /* Aplicamos Sour Gummy */
+    background-color: #024D60; 
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 12px rgba(2, 77, 96, 0.25);
+}
+
+.btn-start:hover {
+    background-color: #1C4EA7; 
+    transform: translateY(-2px);
+}
+
+.home-footer-text {
+    font-size: 0.85rem;
+    color: #024D60;
+    opacity: 0.7;
+    margin-top: 15px;
+}
+
+/* Ilustraciones decorativas (panel derecho) */
+.home-hero-visual {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.floating-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(2, 77, 96, 0.08);
+    width: 260px;
+    text-align: center;
+    border-bottom: 4px solid #2CACAD; 
+    animation: float 4s ease-in-out infinite;
+}
+
+.floating-card.delay {
+    animation-delay: 2s;
+    border-bottom-color: #1C4EA7; 
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.floating-card h3 {
+    font-family: 'Nunito', sans-serif; /* Aplicamos Nunito */
+    font-size: 1.05rem;
+    color: #1C4EA7;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.floating-card p {
+    font-size: 0.85rem;
+    color: #024D60;
+    opacity: 0.8;
+}
+
+.test-container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(2, 77, 96, 0.05);
+    margin-bottom: 30px;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+}
+
+.test-header h1 {
+    font-family: 'Nunito', sans-serif; /* Aplicamos Nunito */
+    font-size: 1.4rem;
+    color: #1C4EA7; 
+    font-weight: 800;
+}
+
+.timer-box {
+    background-color: #1C4EA7; 
+    color: white;
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.05rem;
+    box-shadow: 0 2px 8px rgba(28, 78, 167, 0.3);
+    transition: background-color 0.3s;
+}
+
+.pregunta-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border-left: 6px solid #2CACAD; 
+    box-shadow: 0 4px 15px rgba(2, 77, 96, 0.04);
+    transition: transform 0.2s;
+}
+
+.pregunta-card:hover {
+    transform: translateY(-2px);
+}
+
+.pregunta-texto {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #024D60; 
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.pregunta-numero {
+    color: #1C4EA7; 
+    font-weight: 800;
+}
+
+.opciones-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.opcion-item {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid #75E2E0; 
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #D9F5F0; 
+}
+
+.opcion-item:hover {
+    background-color: white;
+    border-color: #1C4EA7; 
+}
+
+.opcion-item input[type="radio"]:checked {
+    accent-color: #1C4EA7;
+}
+
+.opcion-item input[type="radio"]:checked + .opcion-letra,
+.opcion-item input[type="radio"]:checked + .opcion-letra + span {
+    color: #1C4EA7;
+    font-weight: 700;
+}
+
+.opcion-item input {
+    margin-right: 15px;
+    transform: scale(1.2);
+}
+
+.opcion-letra {
+    font-weight: 700;
+    margin-right: 8px;
+    color: #024D60;
+}
+
+.submit-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-enviar {
+    font-family: 'Sour Gummy', sans-serif; /* Aplicamos Sour Gummy */
+    background-color: #2CACAD; 
+    color: white;
+    border: none;
+    padding: 15px 45px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(44, 172, 173, 0.3);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-enviar:hover {
+    background-color: #024D60; 
+    transform: scale(1.02);
+}
+

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consentimiento Informado - Test Verbal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
+
+    :root {
+      --prussian-blue: #1C4EA7;
+      --midnight-green: #024D60;
+      --light-sea-green: #2CACAD;
+      --sky-blue: #75E2E0;
+      --water: #D9F5F0;
+      --blanco: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--light-sea-green);
+      font-family: 'Lato', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card-consentimiento {
+      width: 100%;
+      max-width: 650px;
+      background-color: var(--blanco);
+      border-radius: 35px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(2, 77, 96, 0.2);
+    }
+
+    .titulo {
+      font-family: 'Nunito', sans-serif;
+      color: var(--prussian-blue);
+      font-size: 32px;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitulo {
+      color: var(--midnight-green);
+      font-size: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+      opacity: 0.8;
+    }
+
+    .linea-divisoria {
+      border: none;
+      border-top: 2px dashed var(--light-sea-green);
+      margin-bottom: 30px;
+    }
+
+    .seccion-info {
+      margin-bottom: 20px;
+    }
+
+    .item-titulo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--midnight-green);
+      margin-bottom: 4px;
+    }
+
+    .item-texto {
+      font-size: 15px;
+      color: #555555;
+      padding-left: 5px;
+    }
+
+    .contenedor-aceptacion {
+      margin-top: 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .label-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--midnight-green);
+      line-height: 1.4;
+    }
+
+    .label-check input[type="checkbox"] {
+      margin-top: 2px;
+      transform: scale(1.2);
+      accent-color: var(--prussian-blue);
+    }
+
+    .btn-comenzar {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--prussian-blue);
+      color: var(--blanco);
+      border: none;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 25px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .btn-comenzar:disabled {
+      background-color: #cccccc;
+      color: #777777;
+      cursor: not-allowed;
+    }
+
+    .btn-comenzar:not(:disabled):hover {
+      background-color: #133b80;
+    }
+
+    .btn-comenzar:not(:disabled):active {
+      transform: scale(0.99);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-consentimiento">
+    <h1 class="titulo">Consentimiento Informado</h1>
+    <p class="subtitulo">Por favor, lea atentamente la siguiente información antes de comenzar.</p>
+    
+    <hr class="linea-divisoria">
+
+    <div class="seccion-info">
+      <div class="item-titulo">Objetivo</div>
+      <div class="item-texto">"Esta prueba mide habilidades de comprensión verbal."</div>
+    </div>
+
+    <div class="seccion-info">
+      <div class="item-titulo">Duración</div>
+      <div class="item-texto">"Duración aproximada: 15 minutos."</div>
+    </div>
+
+    <div class="seccion-info">
+      <div class="item-titulo">Uso de datos</div>
+      <div class="item-texto">"Los resultados serán revisados por un profesional autorizado."</div>
+    </div>
+
+    <div class="seccion-info">
+      <div class="item-titulo">Limitación</div>
+      <div class="item-texto">"No representa un diagnóstico psicológico por sí solo."</div>
+    </div>
+
+    <div class="seccion-info">
+      <div class="item-titulo">Privacidad</div>
+      <div class="item-texto">"La información será tratada de forma confidencial."</div>
+    </div>
+
+    <div class="contenedor-aceptacion">
+      <label class="label-check">
+        <input type="checkbox" id="chkAceptar">
+        <span>He leído y acepto los términos del consentimiento informado para realizar esta evaluación.</span>
+      </label>
+      
+      <button type="button" id="btnComenzar" class="btn-comenzar" disabled>Comenzar Evaluación</button>
+    </div>
+  </div>
+
+  <script>
+    const chkAceptar = document.getElementById('chkAceptar');
+    const btnComenzar = document.getElementById('btnComenzar');
+
+    // Habilitar botón solo cuando se marque el checkbox
+    chkAceptar.addEventListener('change', function() {
+      btnComenzar.disabled = !this.checked;
+    });
+
+    // Redirección directa al test
+    btnComenzar.addEventListener('click', function() {
+      window.location.href = 'test.html';
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Comprensión Verbal</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Georama:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pliant:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+  </style>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  </head>
+<body>
+
+  <div class="cronometro-flotante">
+    <span class="material-symbols-outlined" style="color: var(--azul-oscuro);">timer</span>
+    <div class="tiempo-texto" id="displayTiempo">15:00</div>
+    <button type="button" class="btn-toggle-tiempo" id="btnToggleTiempo" title="Ocultar/Mostrar tiempo">
+        <span class="material-symbols-outlined" id="iconoOjo">visibility_off</span>
+    </button>
+  </div>
+
+  <div class="contenedor-test">
+    <div class="cabecera-test">
+      <h1>Test de Comprensión Verbal</h1>
+      <p>Seleccione la interpretación que mejor se adapte a cada frase.</p>
+    </div>
+
+    <div class="instrucciones">
+      <span class="material-symbols-outlined">timer</span>
+      <span><strong>Dispondrá de 15 minutos.</strong> Procure hacer el máximo de ejercicios trabajando lo más rápidamente que pueda. Todas las preguntas son obligatorias.</span>
+    </div>
+
+ <form action="resultado.html" method="get">
+      
+      <div class="pregunta-card">
+        <p class="enunciado">1. A VECES UN GIGANTE NECESITA LOS SERVICIOS DE UN ENANO.</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p1" value="A" required> <span><span class="opcion-letra">A.</span> El éxito es a menudo difícil de prever.</span></label>
+          <label class="opcion-label"><input type="radio" name="p1" value="B"> <span><span class="opcion-letra">B.</span> A menudo se tiene necesidad de alguien inferior a uno.</span></label>
+          <label class="opcion-label"><input type="radio" name="p1" value="C"> <span><span class="opcion-letra">C.</span> Dar es una cosa fácil.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">2. SI LA TÉCNICA NOS HACE PERDER EL ESPÍRITU, ES QUE NO MERECEMOS CONSERVARLO. (J. ROSTAND)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p2" value="A" required> <span><span class="opcion-letra">A.</span> Si no dejamos invadir por la técnica estamos perdidos.</span></label>
+          <label class="opcion-label"><input type="radio" name="p2" value="B"> <span><span class="opcion-letra">B.</span> El espíritu y la técnica son irreconciliables.</span></label>
+          <label class="opcion-label"><input type="radio" name="p2" value="C"> <span><span class="opcion-letra">C.</span> Si el hombre se destruye por la técnica sólo él es responsable de su derrota.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">3. Y POR TANTO NO PUEDE HACER NADA PARA LA FELICIDAD DE LOS DEMÁS AQUEL QUE ES INCAPAZ DE SER FELIZ ÉL MISMO. (A. GIDE)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p3" value="A" required> <span><span class="opcion-letra">A.</span> La felicidad es lo único que puede darse sin poseerla.</span></label>
+          <label class="opcion-label"><input type="radio" name="p3" value="B"> <span><span class="opcion-letra">B.</span> Toda felicidad es altruista.</span></label>
+          <label class="opcion-label"><input type="radio" name="p3" value="C"> <span><span class="opcion-letra">C.</span> Seamos felices para poder hacer felices a otros.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">4. PARA QUÉ PONER ESTA PALABRA EN SINGULAR QUE SE NOS ESCAPA, SI PUESTA EN PLURAL LA ENCONTRAMOS TODOS LOS DÍAS. (COLETTE)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p4" value="A" required> <span><span class="opcion-letra">A.</span> El mito de la felicidad absoluta oculta la reality de las alegrías cotidianas.</span></label>
+          <label class="opcion-label"><input type="radio" name="p4" value="B"> <span><span class="opcion-letra">B.</span> La felicidad es un mito que nos resulta imposible alcanzar.</span></label>
+          <label class="opcion-label"><input type="radio" name="p4" value="C"> <span><span class="opcion-letra">C.</span> Esperemos la felicidad que pueda traernos el mañana.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">5. PARA CADA UNO ES BARBARIE AQUELLO QUE NO LE ES FAMILIAR. (MONTAIGNE)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p5" value="A" required> <span><span class="opcion-letra">A.</span> El uso define la barbarie como aquello que es propio de un individuo.</span></label>
+          <label class="opcion-label"><input type="radio" name="p5" value="B"> <span><span class="opcion-letra">B.</span> La noción de barbarie es relativa en cada civilización.</span></label>
+          <label class="opcion-label"><input type="radio" name="p5" value="C"> <span><span class="opcion-letra">C.</span> La barbarie es difícil de definir.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">6. EN UN ACTO TAN COMPLEJO COMO ES EL JUICIO ESTÉTICO DISTINGUIMOS CON DIFICULTAD AQUELLO QUE NOSOTROS APORTAMOS DE LO QUE PROCEDE DE LAS ADQUISICIONES CULTURALES. (J. CHARBONNEAUX)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p6" value="A" required> <span><span class="opcion-letra">A.</span> Es difícil separar el juicio personal de la impregnación recibida cuando decimos: "Esto es bonito".</span></label>
+          <label class="opcion-label"><input type="radio" name="p6" value="B"> <span><span class="opcion-letra">B.</span> El juicio estético es complejo ya que pone en juego toda una educación.</span></label>
+          <label class="opcion-label"><input type="radio" name="p6" value="C"> <span><span class="opcion-letra">C.</span> Un ser sin cultura no podrá emitir un juicio estético.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">7. RÍE BIEN EL QUE RÍE ÚLTIMO</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p7" value="A" required> <span><span class="opcion-letra">A.</span> Es necesario esperar haber pasado la última para conocer el final de la historia.</span></label>
+          <label class="opcion-label"><input type="radio" name="p7" value="B"> <span><span class="opcion-letra">B.</span> A pícaro, pícaro y medio.</span></label>
+          <label class="opcion-label"><input type="radio" name="p7" value="C"> <span><span class="opcion-letra">C.</span> Lo importante es decir la última palabra.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">8. UNA GOLONDRINA NO HACE VERANO</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p8" value="A" required> <span><span class="opcion-letra">A.</span> Las apariencias no son la realidad.</span></label>
+          <label class="opcion-label"><input type="radio" name="p8" value="B"> <span><span class="opcion-letra">B.</span> De la mano a la boca se pierde la sopa.</span></label>
+          <label class="opcion-label"><input type="radio" name="p8" value="C"> <span><span class="opcion-letra">C.</span> Debe tenerse cuidado con las apariencias, son a menudo engañosas.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <p class="enunciado">9. LA SOBREPROTECCIÓN RETRASA LA MADUREZ DEL NIÑO, CUANDO PODRÍA PENSARSE QUE LO BENEFICIA. (P. GASCAR)</p>
+        <div class="opciones">
+          <label class="opcion-label"><input type="radio" name="p9" value="A" required> <span><span class="opcion-letra">A.</span> Un niño sobreprotegido por sus padres se beneficia de una madurez psicológica más lenta, por lo que tiene un yo más sólido.</span></label>
+          <label class="opcion-label"><input type="radio" name="p9" value="B"> <span><span class="opcion-letra">B.</span> Es necesario proteger incluso con exceso, al niño que madura lentamente.</span></label>
+          <label class="opcion-label"><input type="radio" name="p9" value="C"> <span><span class="opcion-letra">C.</span> Si los padres se preocupasen menos de proteger al niño, éste llegaría más rápidamente a ser autónomo.</span></label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">10.</span> QUIEN HA APRENDIDO A MORIR, HA DESAPRENDIDO A SERVIR. (MONTAIGNE)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p10" value="A" required>
+                <span><span class="opcion-letra">A)</span> No puede hacerse esclavo a aquel que no tiene miedo a la muerte.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p10" value="B">
+                <span><span class="opcion-letra">B)</span> Es necesario saber servir para saber morir.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p10" value="C">
+                <span><span class="opcion-letra">C)</span> Si no se sirve a nadie no se aprecia la vida.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">11.</span> LOS PERROS LADRAN, LA CARAVANA SIGUE.
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p11" value="A" required>
+                <span><span class="opcion-letra">A)</span> Para un corazón valiente, nada hay imposible.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p11" value="B">
+                <span><span class="opcion-letra">B)</span> Haz bien y deja que digan.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p11" value="C">
+                <span><span class="opcion-letra">C)</span> El hombre que sigue su quimera, no oye las advertencias que le da el cielo.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">12.</span> LOS ÁRBOLES NO DEJAN VER EL BOSQUE.
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p12" value="A" required>
+                <span><span class="opcion-letra">A)</span> Siempre se ve la paja en el ojo ajeno y no se ve la viga en el propio.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p12" value="B">
+                <span><span class="opcion-letra">B)</span> Quien mira demasiado por donde va, no ve a donde debe ir.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p12" value="C">
+                <span><span class="opcion-letra">C)</span> Aquellos que se aplican a las pequeñas cosas generalmente se vuelven incapaces de las grandes.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">13.</span> ES PRECISO QUE UNA PUERTA BONITA SEA PRIMERO UNA PUERTA. (ALAIN)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p13" value="A" required>
+                <span><span class="opcion-letra">A)</span> El objeto útil deja de ser bello.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p13" value="B">
+                <span><span class="opcion-letra">B)</span> Es bastante más bonito porque es inútil.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p13" value="C">
+                <span><span class="opcion-letra">C)</span> Lo funcional es una condición necesaria para lo bello.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">14.</span> PUEDO NEGAR UNA COSA SIN VERME OBLIGADO A DESHONRARLA Y SIN NEGAR A LOS DEMÁS EL DERECHO DE CREER EN ELLA. (A. CAMUS)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p14" value="A" required>
+                <span><span class="opcion-letra">A)</span> Incluso si soy escéptico debo respetar las ideas de los otros.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p14" value="B">
+                <span><span class="opcion-letra">B)</span> Cualquiera que sea mi opinión, mi compromiso no llega hasta la intolerancia.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p14" value="C">
+                <span><span class="opcion-letra">C)</span> Incluso si creo en una cosa no puedo imponerla a otros.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">15.</span> MALDITO SEA AQUEL POR EL CUAL LLEGA EL ESCÁNDAL.
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p15" value="A" required>
+                <span><span class="opcion-letra">A)</span> No hay humo sin fuego.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p15" value="B">
+                <span><span class="opcion-letra">B)</span> Ten cuidado que al manchar a los otros no te salpiques tu mismo.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p15" value="C">
+                <span><span class="opcion-letra">C)</span> Quien siembra vientos recoge tempestades.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">16.</span> CUANTO MÁS ALTO SUBE EL MONO, MAS SE LE VE EL TRASERO.
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p16" value="A" required>
+                <span><span class="opcion-letra">A)</span> El hombre que se hace ver demasiado no tiene vida íntima.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p16" value="B">
+                <span><span class="opcion-letra">B)</span> Nobleza obliga.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p16" value="C">
+                <span><span class="opcion-letra">C)</span> Una ascensión no está jamás exenta de peligro.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">17.</span> LA PERSONA PRUDENTE RIEGA LENTAMENTE, LA INSENSATA LO INUNDA TODO DE GOLPE. (FLORIAN)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p17" value="A" required>
+                <span><span class="opcion-letra">A)</span> Quien quiere llegar lejos arregla su cabalgadura.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p17" value="B">
+                <span><span class="opcion-letra">B)</span> Poco a poco hilaba la vieja el copo.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p17" value="C">
+                <span><span class="opcion-letra">C)</span> El tiempo no importa para el negocio.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">18.</span> CADA DESEO ME HA ENRIQUECIDO MÁS QUE LA POSESION SIEMPRE FALSA DEL OBJETO DE MI DESEO. (A. GIDE)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p18" value="A" required>
+                <span><span class="opcion-letra">A)</span> Una cosa tiene tanto más valor cuanto más tiempo ha sido deseada.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p18" value="B">
+                <span><span class="opcion-letra">B)</span> La verdadera riqueza reside en el deseo y no en la posesión.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p18" value="C">
+                <span><span class="opcion-letra">C)</span> La posesión es un espejismo decepcionante.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">19.</span> QUE IMPORTA LA BOTELLA SIEMPRE QUE SE TENGA LA BORRACHERA.
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p19" value="A" required>
+                <span><span class="opcion-letra">A)</span> El fin justifica los medios.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p19" value="B">
+                <span><span class="opcion-letra">B)</span> Es a menudo en las pequeñas ostras, donde se encuentran las más bellas perlas.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p19" value="C">
+                <span><span class="opcion-letra">C)</span> Los decorados están hechos de cartón, los accesorios en papel pero la magia del teatro suscita la ilusión.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">20.</span> A BURRA VIEJA, ALBARDA NUEVA.
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p20" value="A" required>
+                <span><span class="opcion-letra">A)</span> El hábito no hace al monje.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p20" value="B">
+                <span><span class="opcion-letra">B)</span> La riqueza ilumina la mediocridad.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p20" value="C">
+                <span><span class="opcion-letra">C)</span> Es en las viejas ollas donde se hace la mejor sopa.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">21.</span> TERMINADA LA FIESTA, ADIOS AL SANTO.
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p21" value="A" required>
+                <span><span class="opcion-letra">A)</span> En la mayor parte del mundo, la prosperidad no tiene compañía más segura que la ignorancia y el olvido de los servicios prestados.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p21" value="B">
+                <span><span class="opcion-letra">B)</span> El tiempo pasa y trae consigo recuerdos agradables.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p21" value="C">
+                <span><span class="opcion-letra">C)</span> Lo que el viento se llevó.</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">26.</span> HABLO CON LA IDEA DE CALLARME... Y HABLO. (A. PORCHIA)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p26" value="A" required>
+                <span><span class="opcion-letra">A)</span> Las palabras son los pensamientos lo que, el oro es al diamante; son necesarias para ponerlos de manifiesto pero en poca cantidad. (Voltaire)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p26" value="B">
+                <span><span class="opcion-letra">B)</span> En muchos hombres la palabra precede al pensamiento. Saben solamente lo que piensan después de haber oído lo que dicen. (G. Le-Bon).</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p26" value="C">
+                <span><span class="opcion-letra">C)</span> Sólo cuando uno piensa que no es escuchado y continúa hablando, es cuando empieza a decir cosas que merecen ser escuchadas. (R. de Montesquieu).</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">27.</span> LA VERDAD ES COMO DIOS, NO SE MUESTRA CON EL ROSTRO DESCUBIERTO. (GOETHE)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p27" value="A" required>
+                <span><span class="opcion-letra">A)</span> La verdad no es una bella mujer escondida en el fondo de un pozo, sino un tímido pájaro que sólo la astucia puede apresar. (J. Conrad)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p27" value="B">
+                <span><span class="opcion-letra">B)</span> Una verdad muy clara pronto deja de ser una verdad fecunda. (G. Lebon)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p27" value="C">
+                <span><span class="opcion-letra">C)</span> A menos que se ame la verdad no se sabrá conocerla. (B. Pascal)</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">28.</span> EL ABURRIMIENTO ES QUIZAS UN PRIVILEGIO. LOS IMBECILES NO SIENTEN ABURRIRSE, QUIZAS NO SE ABURREN. (Ed. y J. de GONCOURT)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p28" value="A" required>
+                <span><span class="opcion-letra">A)</span> No es uno de los menores méritos de la gente de mucho el saber aburrirse sin que lo parezca.</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p28" value="B">
+                <span><span class="opcion-letra">B)</span> En el teatro, el recreo de la vista y el oído dificulta mucho la reflexión. (Goethe)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p28" value="C">
+                <span><span class="opcion-letra">C)</span> Rosine: "El aburrimiento me mata". Fígaro: "Lo creo, no engorda más que a los tontos". (Beaumarchais)</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">29.</span> CUANDO NO SE TIENE PELO, SE ENCUENTRAN RIDICULAS LAS CABELLERAS. (LEAUTAUD)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p29" value="A" required>
+                <span><span class="opcion-letra">A)</span> Los viejos creen lamentarse de su tiempo, se equivocan, no se lamentan más que de su edad. (V. Hugo)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p29" value="B">
+                <span><span class="opcion-letra">B)</span> Tanto sabe la juventud como puede la vejez. (Proverbio)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p29" value="C">
+                <span><span class="opcion-letra">C)</span> A los viejos les gusta dar buenos consejos para consolarse de no tener edad para dar malos ejemplos. (La Rochefoucauld).</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">30.</span> LO QUE PROBABLEMENTE FALSEA TODA LA VIDA, ES EL ESTAR CONVENCIDO DE QUE SE DICE LA VERDAD PORQUE SE DICE LO QUE SE PIENSA. (S. GUITRY)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p30" value="A" required>
+                <span><span class="opcion-letra">A)</span> A cada uno su verdad. (Pirandello)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p30" value="B">
+                <span><span class="opcion-letra">B)</span> El principal uso que hacemos de nuestro amor a la verdad, es el de persuadirnos de que aquello que amamos es verdadero. (P. Nicole)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p30" value="C">
+                <span><span class="opcion-letra">C)</span> El deseo de hablar de nosotros y de mostrar nuestros defectos del lado que queremos, constituye una gran parte de nuestra sinceridad. (La Rochefoucauld)</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="pregunta-card">
+        <div class="pregunta-texto">
+            <span class="pregunta-numero">31.</span> DESDE HACE TREINTA Y CINCO AÑOS REVIENTO DE ORGULLO, ES MI MANERA DE MORIR DE VERGUENZA. (JEAN PAUL SARTRE)
+        </div>
+        <div class="opciones-lista">
+            <label class="opcion-item">
+                <input type="radio" name="p31" value="A" required>
+                <span><span class="opcion-letra">A)</span> Es necesario matar el orgullo sin herirlo, ya que si se le hiere no muere. (Rivarol).</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p31" value="B">
+                <span><span class="opcion-letra">B)</span> El orgullo que a menudo nos inspira tanta envidia también nos sirve a menudo para moderarla. (La Rochefoucauld)</span>
+            </label>
+            <label class="opcion-item">
+                <input type="radio" name="p31" value="C">
+                <span><span class="opcion-letra">C)</span> El amor propio encuentra su goce en el sufragio y aprobación de los hombres, el último grado del orgullo es gozar de su desprecio. (S. de Meihan)</span>
+            </label>
+        </div>
+      </div>
+
+      <div class="submit-container">
+<button type="submit" class="btn-finalizar">Finalizar y ver resultados</button>
+            
+    
+
+             
+      </div>
+
+    </form>
+  </div>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Georama:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pliant:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+    :root {
+      --celeste-pastel: #2CACAD; 
+      --celeste-principal: #7ed8ff; 
+      --azul-oscuro: #1C4EA7; 
+      --blanco: #ffffff;
+      --texto-oscuro: #024D60; 
+      --texto-suave: #666666;
+      --fondo-pregunta: #e8f7f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Lato', sans-serif; }
+
+    body {
+        background-color: var(--celeste-pastel); 
+        display: flex; justify-content: center; align-items: flex-start; 
+        min-height: 100vh; padding: 40px 20px;
+    }
+
+    /* Estilos del Cronómetro Flotante */
+    .cronometro-flotante {
+        position: fixed; top: 20px; right: 20px; background-color: var(--blanco);
+        border: 2px solid var(--azul-oscuro); border-radius: 25px; padding: 10px 20px;
+        display: flex; align-items: center; gap: 15px; box-shadow: 0 5px 15px rgba(28, 78, 167, 0.2);
+        z-index: 1000; font-family: 'Nunito', sans-serif;
+    }
+    .tiempo-texto { font-size: 20px; font-weight: 800; color: var(--azul-oscuro); min-width: 65px; text-align: center; }
+    .btn-toggle-tiempo { background: none; border: none; cursor: pointer; color: var(--texto-suave); display: flex; align-items: center; justify-content: center; transition: color 0.2s; }
+    .btn-toggle-tiempo:hover { color: var(--azul-oscuro); }
+
+    /* Estilos del Contenedor del Test */
+    .contenedor-test {
+        width: 100%; max-width: 800px; background-color: var(--blanco);
+        border-radius: 35px; padding: 50px 40px; box-shadow: 0 15px 35px rgba(28, 78, 167, 0.15); 
+        margin-top: 60px;
+    }
+
+    .cabecera-test { text-align: center; margin-bottom: 40px; border-bottom: 2px dashed var(--celeste-pastel); padding-bottom: 20px; }
+    .cabecera-test h1 { font-family: 'Nunito', sans-serif; color: var(--azul-oscuro); font-size: 32px; font-weight: 900; margin-bottom: 10px; }
+    .cabecera-test p { font-family: 'Georama', sans-serif; color: var(--texto-suave); font-size: 16px; }
+    
+    .instrucciones { background-color: #fff3cd; color: #856404; padding: 15px; border-radius: 15px; margin-bottom: 30px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    
+    /* Contenedor unificado de la tarjeta de la pregunta (1 al 31) */
+    .pregunta-card, .card-pregunta {
+      background-color: var(--fondo-pregunta);
+      border-radius: 25px;
+      padding: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(2, 77, 96, 0.05);
+    }
+
+    /* Enunciado principal de la pregunta */
+    .enunciado, .pregunta-texto, .enunciado-pregunta {
+      font-family: 'Nunito', sans-serif;
+      color: var(--texto-oscuro);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* Contenedor de las respuestas */
+    .opciones, .opciones-lista, .opciones-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Cada fila de opción individual */
+    .opcion-label, .opcion-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: #444444;
+      font-size: 16px;
+      line-height: 1.4;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 12px;
+      transition: background-color 0.2s ease;
+    }
+
+    .opcion-label:hover, .opcion-item:hover {
+      background-color: rgba(44, 172, 173, 0.08);
+      color: #000000;
+    }
+
+    /* Estilo para los botones circulares radio */
+    .opcion-label input[type="radio"], .opcion-item input[type="radio"] {
+      margin-top: 4px;
+      accent-color: var(--azul-oscuro);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .opcion-letra {
+      font-weight: bold;
+      margin-right: 4px;
+    }
+
+    .submit-container {
+      margin-top: 40px;
+    }
+
+    .btn-finalizar { 
+      font-family: 'Nunito', sans-serif; 
+      background-color: var(--azul-oscuro); 
+      color: white; 
+      border: none; 
+      padding: 18px 40px; 
+      font-size: 1.2rem; 
+      font-weight: bold; 
+      border-radius: 30px; 
+      cursor: pointer; 
+      transition: all 0.2s ease; 
+      display: block; 
+      width: 100%; 
+    }
+    .btn-finalizar:hover { background-color: #12367a; box-shadow: 0 8px 20px rgba(28, 78, 167, 0.3); }
+    .btn-finalizar:active { transform: scale(0.98); }
+  </style>
+
+  <script>
+    let tiempoRestante = 15 * 60; 
+    let intervalo;
+    let tiempoOculto = false;
+
+    const displayTiempo = document.getElementById('displayTiempo');
+    const btnToggle = document.getElementById('btnToggleTiempo');
+    const iconoOjo = document.getElementById('iconoOjo');
+
+    function actualizarDisplay() {
+        const minutes = Math.floor(tiempoRestante / 60);
+        let segundos = tiempoRestante % 60;
+        if (segundos < 10) segundos = '0' + segundos;
+
+        displayTiempo.innerText = tiempoOculto ? "--:--" : `${minutes}:${segundos}`;
+    }
+
+    btnToggle.addEventListener('click', () => {
+        tiempoOculto = !tiempoOculto;
+        iconoOjo.innerText = tiempoOculto ? 'visibility' : 'visibility_off';
+        actualizarDisplay();
+    });
+
+    intervalo = setInterval(() => {
+        tiempoRestante--;
+        actualizarDisplay();
+
+        if (tiempoRestante <= 0) {
+            clearInterval(intervalo);
+            alert("El tiempo ha concluido. El formulario se enviará automáticamente.");
+            document.getElementById('formularioTest').submit(); 
+        }
+    }, 1000);
+  </script>
+
+</body>
+</html>
