@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados - Test de Comprensión Verbal</title>
+
+</head>
+<body>
+
+  <div class="contenedor-resultados">
+    <h1>Tu Resultado</h1>
+    <p style="color: var(--texto-suave);">Test de Comprensión Verbal completado con éxito.</p>
+
+    <div class="score-box">
+      <div class="puntaje-grande" id="txtPuntaje">0 / 22</div>
+      <div class="retroalimentacion" id="txtMensaje">Calculando...</div>
+    </div>
+
+    <div class="detalles-lista">
+      <p>🔹 <strong>Respuestas Correctas:</strong> <span id="txtCorrectas" style="color: var(--verde-exito); font-weight: bold;">0</span></p>
+      <p>🔹 <strong>Respuestas Incorrectas o en Blanco:</strong> <span id="txtIncorrectas" style="color: #c62828; font-weight: bold;">0</span></p>
+      <p>🔹 <strong>Porcentaje de Acierto:</strong> <span id="txtPorcentaje" style="font-weight: bold;">0%</span></p>
+    </div>
+
+   <a href="#" onclick="window.history.back(); return false;" class="btn-reintentar">Volver a realizar el test</a>
+  </div>
+
+
+    <style>
+    :root {
+      --celeste-pastel: #2CACAD; 
+      --azul-oscuro: #1C4EA7; 
+      --blanco: #ffffff;
+      --texto-oscuro: #024D60; 
+      --texto-suave: #666666;
+      --verde-exito: #2e7d32;
+      --fondo-tarjeta: #f4fbfb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Lato', sans-serif; }
+
+    body {
+        background-color: var(--celeste-pastel); 
+        display: flex; justify-content: center; align-items: flex-start; 
+        min-height: 100vh; padding: 40px 20px;
+    }
+
+    .contenedor-resultados {
+        width: 100%; max-width: 600px; background-color: var(--blanco);
+        border-radius: 35px; padding: 40px; box-shadow: 0 15px 35px rgba(28, 78, 167, 0.15); 
+        margin-top: 40px; text-align: center;
+    }
+
+    h1 { font-family: 'Nunito', sans-serif; color: var(--azul-oscuro); font-size: 30px; margin-bottom: 20px; }
+    
+    .score-box {
+      background-color: var(--fondo-tarjeta);
+      border: 2px solid rgba(44, 172, 173, 0.3);
+      border-radius: 25px;
+      padding: 30px;
+      margin: 25px 0;
+    }
+
+    .puntaje-grande {
+      font-family: 'Nunito', sans-serif;
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--azul-oscuro);
+    }
+
+    .retroalimentacion {
+      font-size: 18px;
+      color: var(--texto-oscuro);
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .detalles-lista {
+      text-align: left;
+      margin-top: 25px;
+      color: var(--texto-suave);
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .btn-reintentar {
+      font-family: 'Nunito', sans-serif; 
+      background-color: var(--azul-oscuro); 
+      color: white; border: none; padding: 15px 30px; 
+      font-size: 1rem; font-weight: bold; border-radius: 25px; 
+      cursor: pointer; transition: all 0.2s ease; 
+      display: inline-block; margin-top: 25px; text-decoration: none;
+    }
+    .btn-reintentar:hover { background-color: #12367a; box-shadow: 0 5px 15px rgba(28, 78, 167, 0.3); }
+  </style>
+
+  <script>
+    // 1. HOJA DE RESPUESTAS CORRECTAS (Clave)
+    // Cambia las letras por las respuestas reales del examen
+    const respuestasCorrectas = {
+      p1: 'B', p2: 'C', p3: 'C', p4: 'A', p5: 'B', 
+      p6: 'A', p7: 'A', p8: 'C', p9: 'C', p10: 'A',
+      p11: 'B', p12: 'C', p13: 'C', p14: 'B', p15: 'C',
+      p16: 'C', p17: 'B', p18: 'B', p19: 'A', p20: 'B',
+      p21: 'A', p26: 'B', p27: 'B', p28: 'C', p29: 'A',
+      p30: 'B', p31: 'C'
+    };
+
+    // 2. Leer las respuestas que vienen desde la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    let correctas = 0;
+    const totalPreguntas = Object.keys(respuestasCorrectas).length;
+
+    // 3. Comparar lo que marcó el usuario contra la clave
+    for (let pregunta in respuestasCorrectas) {
+      // El valor enviado en el formulario (.get) lo pasamos a Mayúsculas por si acaso
+      const respuestaUsuario = urlParams.get(pregunta);
+      
+      if (respuestaUsuario && respuestaUsuario.toUpperCase() === respuestasCorrectas[pregunta].toUpperCase()) {
+        correctas++;
+      }
+    }
+
+    // 4. Hacer los cálculos matemáticos
+    let incorrectas = totalPreguntas - correctas;
+    let porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    // 5. Mostrar los resultados en la pantalla de forma dinámica
+    document.getElementById('txtPuntaje').innerText = `${correctas} / ${totalPreguntas}`;
+    document.getElementById('txtCorrectas').innerText = correctas;
+    document.getElementById('txtIncorrectas').innerText = incorrectas;
+    document.getElementById('txtPorcentaje').innerText = `${porcentaje}%`;
+
+    // 6. Mensaje personalizado según el desempeño del usuario
+    let mensaje = "";
+    if (porcentaje >= 90) {
+      mensaje = "¡Excelente! Tienes una comprensión verbal sobresaliente. ";
+    } else if (porcentaje >= 70) {
+      mensaje = "¡Muy buen trabajo! Nivel de comprensión alto. ";
+    } else if (porcentaje >= 50) {
+      mensaje = "Aprobado. Puedes mejorar analizando más detenidamente. ";
+    } else {
+      mensaje = "Sigue practicando. ¡La lectura constante te ayudará! ";
+    }
+    document.getElementById('txtMensaje').innerText = mensaje;
+  </script>
+
+</body>
+</html>
+
