@@ -8,7 +8,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Georama:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pliant:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
   </style>
-
+//fuente de titulo y subtitulo 
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
 </head>
@@ -72,160 +72,6 @@
 
     </div>
   </div>
-
-  <script>
-  const formulario = document.getElementById('formularioRegistro');
-  const tipoDocumento = document.getElementById('tipo_documento');
-  const inputDocumento = document.getElementById('id_unico');
-  const mensajeValidacion = document.getElementById('mensaje_validacion');
-
-  tipoDocumento.addEventListener('change', limpiarYAdaptar);
-
-  formulario.addEventListener('submit', function(event) {
-    event.preventDefault(); // Detiene recarga o envíos alternos
-
-    const documentoValido = validarDocumentoSeleccionado();
-
-    if (!documentoValido) {
-      inputDocumento.focus();
-      return;
-    }
-
-    // ENLACE DIRECTO CON TU SERVLET API DE OPENXAVA
-    const datosParticipante = {
-        nombreCompleto: document.getElementById("nombre_completo").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        tipoDocumento: tipoDocumento.value,
-        idUnico: inputDocumento.value.trim(),
-        fechaNacimiento: document.getElementById("fecha_nacimiento").value,
-        ocupacion: document.getElementById("ocupacion").value.trim(),
-        respuestas: "" // Se enviará vacío en el registro inicial
-    };
-
-    // Endpoint local de tu Tomcat en OpenXava
-    const URL_API = "http://localhost:8080/Comprensi-n-Verbal/api/participante/guardar";
-
-    fetch(URL_API, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(datosParticipante)
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        }
-        throw new Error("Error en la persistencia del servidor.");
-    })
-    .then(data => {
-        console.log("Éxito en OpenXava:", data);
-        alert("¡Registro exitoso! Redireccionando al test...");
-        window.location.href = 'Consentimiento.html'; // Pasa al test
-    })
-    .catch(error => {
-        console.error("Error detectado:", error);
-        alert("No se pudo conectar con OpenXava. Verifica que tu Tomcat esté encendido.");
-    });
-  });
-
-  function limpiarYAdaptar() {
-    inputDocumento.value = "";
-    mensajeValidacion.textContent = "";
-    inputDocumento.style.borderColor = "";
-
-    if (tipoDocumento.value === "cedula_identidad") {
-      inputDocumento.placeholder = "Ej: 001-010190-0001A";
-      inputDocumento.maxLength = 16;
-    } else {
-      inputDocumento.placeholder = "Ej: 00101019000012";
-      inputDocumento.maxLength = 14; // Limitado a la longitud estricta del módulo 11
-    }
-  }
-
-  function validarDocumentoSeleccionado() {
-    const tipo = tipoDocumento.value;
-    const valor = inputDocumento.value.trim();
-
-    let esValido = false;
-    let textoError = "";
-
-    if (tipo === "cedula_identidad") {
-        esValido = validarCedulaNicaragua(valor);
-        textoError = "Cédula de identidad inválida. Formato correcto: 001-010190-0001A";
-    } else if (tipo === "cedula_residencia") {
-        esValido = validarResidenciaNicaragua(valor);
-        textoError = "Cédula de residencia no válida (debe tener 14 números sin letras).";
-    }
-
-    if (esValido) {
-        mostrarMensaje("Formato verificado con éxito ✔", "green");
-        inputDocumento.style.borderColor = "green";
-        inputDocumento.setCustomValidity(""); 
-        return true;
-    } else {
-        mostrarMensaje(textoError, "red");
-        inputDocumento.style.borderColor = "red";
-        inputDocumento.setCustomValidity(textoError); 
-        return false;
-    }
-  }
-
-  // ALGORITMOS MATEMÁTICOS DE SEPARACIÓN ABSOLUTA
-  function validarCedulaNicaragua(cedula) {
-      const regexEstructuraNica = /^\d{3}-?\d{6}-?\d{4}[A-Y]$/i;
-      return regexEstructuraNica.test(cedula.trim());
-  }
-
-  function validarResidenciaNicaragua(residencia) {
-      if (/[A-Z]$/i.test(residencia.trim())) {
-          return false;
-      }
-      const cedulaLimpia = residencia.replace(/[^0-9]/g, "");
-      if (cedulaLimpia.length !== 14) {
-          return false;
-      }
-
-      const cuerpo = cedulaLimpia.slice(0, 13);
-      const verificador = parseInt(cedulaLimpia[13], 10);
-
-      let suma = 0;
-      let multiplicador = 2;
-
-      for (let i = cuerpo.length - 1; i >= 0; i--) {
-          const num = parseInt(cuerpo[i], 10);
-          if (isNaN(num)) return false;
-
-          suma += num * multiplicador;
-          multiplicador = (multiplicador === 9) ? 2 : multiplicador + 1;
-      }
-
-      const digitoEsperado = (11 - (suma % 11)) % 10;
-      return digitoEsperado === verificador;
-  }
-
-  // Monitoreo en tiempo real al escribir
-  inputDocumento.addEventListener("input", function() {
-      if (this.value.trim() === "") {
-          mensajeValidacion.textContent = "";
-          this.style.borderColor = "";
-          return;
-      }
-      validarDocumentoSeleccionado();
-  });
-
-  // Candado para bloquear viajeros del tiempo (Años futuros)
-  window.addEventListener("DOMContentLoaded", () => {
-      const inputFecha = document.getElementById("fecha_nacimiento");
-      const hoy = new Date();
-      const anio = hoy.getFullYear();
-      const mes = String(hoy.getMonth() + 1).padStart(2, '0');
-      const dia = String(hoy.getDate()).padStart(2, '0');
-      inputFecha.max = `${anio}-${mes}-${dia}`;
-  });
-  </script>
-
-</body>
 
   <style>
     :root {
@@ -415,4 +261,160 @@
         border-radius: 1px;
     }
   </style>
+
+  <script>
+  const formulario = document.getElementById('formularioRegistro');
+  const tipoDocumento = document.getElementById('tipo_documento');
+  const inputDocumento = document.getElementById('id_unico');
+  const mensajeValidacion = document.getElementById('mensaje_validacion');
+
+  tipoDocumento.addEventListener('change', limpiarYAdaptar);
+
+  formulario.addEventListener('submit', function(event) {
+    event.preventDefault(); // Detiene recarga o envíos alternos
+
+    const documentoValido = validarDocumentoSeleccionado();
+
+    if (!documentoValido) {
+      inputDocumento.focus();
+      return;
+    }
+
+    // ENLACE DIRECTO CON TU SERVLET API DE OPENXAVA
+    const datosParticipante = {
+        nombreCompleto: document.getElementById("nombre_completo").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        tipoDocumento: tipoDocumento.value,
+        idUnico: inputDocumento.value.trim(),
+        fechaNacimiento: document.getElementById("fecha_nacimiento").value,
+        ocupacion: document.getElementById("ocupacion").value.trim(),
+        respuestas: "" // Se enviará vacío en el registro inicial
+    };
+
+    // Endpoint local de tu Tomcat en OpenXava
+    const URL_API = "http://localhost:8080/Comprensi-n-Verbal/api/participante/guardar";
+
+    fetch(URL_API, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datosParticipante)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error("Error en la persistencia del servidor.");
+    })
+    .then(data => {
+        console.log("Éxito en OpenXava:", data);
+        alert("¡Registro exitoso! Redireccionando al test...");
+        window.location.href = 'Consentimiento.html'; // Pasa al test
+    })
+    .catch(error => {
+        console.error("Error detectado:", error);
+        alert("No se pudo conectar con OpenXava. Verifica que tu Tomcat esté encendido.");
+    });
+  });
+
+  function limpiarYAdaptar() {
+    inputDocumento.value = "";
+    mensajeValidacion.textContent = "";
+    inputDocumento.style.borderColor = "";
+
+    if (tipoDocumento.value === "cedula_identidad") {
+      inputDocumento.placeholder = "Ej: 001-010190-0001A";
+      inputDocumento.maxLength = 16;
+    } else {
+      inputDocumento.placeholder = "Ej: 00101019000012";
+      inputDocumento.maxLength = 14; // Limitado a la longitud estricta del módulo 11
+    }
+  }
+
+  function validarDocumentoSeleccionado() {
+    const tipo = tipoDocumento.value;
+    const valor = inputDocumento.value.trim();
+
+    let esValido = false;
+    let textoError = "";
+
+    if (tipo === "cedula_identidad") {
+        esValido = validarCedulaNicaragua(valor);
+        textoError = "Cédula de identidad inválida. Formato correcto: 001-010190-0001A";
+    } else if (tipo === "cedula_residencia") {
+        esValido = validarResidenciaNicaragua(valor);
+        textoError = "Cédula de residencia no válida (debe tener 14 números sin letras).";
+    }
+
+    if (esValido) {
+        mostrarMensaje("Formato verificado con éxito ✔", "green");
+        inputDocumento.style.borderColor = "green";
+        inputDocumento.setCustomValidity(""); 
+        return true;
+    } else {
+        mostrarMensaje(textoError, "red");
+        inputDocumento.style.borderColor = "red";
+        inputDocumento.setCustomValidity(textoError); 
+        return false;
+    }
+  }
+
+  // ALGORITMOS MATEMÁTICOS DE SEPARACIÓN ABSOLUTA
+  function validarCedulaNicaragua(cedula) {
+      const regexEstructuraNica = /^\d{3}-?\d{6}-?\d{4}[A-Y]$/i;
+      return regexEstructuraNica.test(cedula.trim());
+  }
+
+  function validarResidenciaNicaragua(residencia) {
+      if (/[A-Z]$/i.test(residencia.trim())) {
+          return false;
+      }
+      const cedulaLimpia = residencia.replace(/[^0-9]/g, "");
+      if (cedulaLimpia.length !== 14) {
+          return false;
+      }
+
+      const cuerpo = cedulaLimpia.slice(0, 13);
+      const verificador = parseInt(cedulaLimpia[13], 10);
+
+      let suma = 0;
+      let multiplicador = 2;
+
+      for (let i = cuerpo.length - 1; i >= 0; i--) {
+          const num = parseInt(cuerpo[i], 10);
+          if (isNaN(num)) return false;
+
+          suma += num * multiplicador;
+          multiplicador = (multiplicador === 9) ? 2 : multiplicador + 1;
+      }
+
+      const digitoEsperado = (11 - (suma % 11)) % 10;
+      return digitoEsperado === verificador;
+  }
+
+  // Monitoreo en tiempo real al escribir
+  inputDocumento.addEventListener("input", function() {
+      if (this.value.trim() === "") {
+          mensajeValidacion.textContent = "";
+          this.style.borderColor = "";
+          return;
+      }
+      validarDocumentoSeleccionado();
+  });
+
+  // Candado para bloquear viajeros del tiempo (Años futuros)
+  window.addEventListener("DOMContentLoaded", () => {
+      const inputFecha = document.getElementById("fecha_nacimiento");
+      const hoy = new Date();
+      const anio = hoy.getFullYear();
+      const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+      const dia = String(hoy.getDate()).padStart(2, '0');
+      inputFecha.max = `${anio}-${mes}-${dia}`;
+  });
+  </script>
+
+</body>
+
+  
 </html>
