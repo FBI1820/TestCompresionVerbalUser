@@ -32,8 +32,9 @@
         <div class="fila-inputs">
           <div class="grupo-input">
             <label for="fecha_nacimiento">Fecha de nacimiento</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
-          </div>
+  <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+  <p id="mensaje_fecha" class="mensaje-validacion"></p>
+</div>
           <div class="grupo-input">
             <label for="nivel_estudios">Nivel de estudios</label>
             <select id="nivel_estudios" name="nivel_estudios" required>
@@ -49,38 +50,318 @@
 
         <div class="fila-inputs">
           <div class="grupo-input">
-            <label for="inicio_sesion">Inicio de sesión</label>
-            <input type="datetime-local" id="inicio_sesion" name="inicio_sesion" required>
+            <label for="tipo_documento">Tipo de Documento</label>
+            <select id="tipo_documento" name="tipo_documento" required>
+              <option value="cedula_identidad" selected>Cédula Nacional</option>
+              <option value="cedula_residencia">Cédula Residencia</option>
+            </select>
           </div>
           <div class="grupo-input">
-            <label for="fin_sesion">Fin de sesión</label>
-            <input type="datetime-local" id="fin_sesion" name="fin_sesion" required>
+            <label for="id_unico">Identificación</label>
+            <input type="text" id="id_unico" name="id_unico" placeholder="Ej: 001-010190-0001A" required>
           </div>
         </div>
 
-        <div class="grupo-input">
-          <input type="text" id="id_unico" name="id_unico" placeholder="Identificador único en BD" required>
-        </div>
+        <span id="mensaje_validacion" style="font-size: 0.85rem; margin-top: -5px; font-weight: 600; display: block; text-align: left; padding-left: 10px; min-height: 20px;"></span>
 
         <button type="submit" class="btn-guardar">Registrar y Continuar</button>
       </form>
 
       <div class="acciones-paciente">
-        <button type="button" class="btn-secundario" onclick="document.getElementById('formularioRegistro').reset();">Limpiar campos</button>
+        <button type="button" class="btn-secundario" onclick="document.getElementById('formularioRegistro').reset(); limpiarYAdaptar();">Limpiar campos</button>
         <button type="button" class="btn-secundario">Volver al inicio</button>
       </div>
 
     </div>
   </div>
 
-  <script>
-    document.getElementById('formularioRegistro').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que intente abrir "guardar_datos.php" si no lo tienes configurado aún
-        
-        // Si llega a este punto, significa que todos los campos 'required' ya fueron llenados correctamente.
-        window.location.href = 'test.html'; 
-    });
-  </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const formulario = document.getElementById("formularioRegistro");
+  const tipoDocumento = document.getElementById("tipo_documento");
+  const inputDocumento = document.getElementById("id_unico");
+  const mensajeValidacion = document.getElementById("mensaje_validacion");
+  const inputFechaNacimiento = document.getElementById("fecha_nacimiento");
+  const mensajeFecha = document.getElementById("mensaje_fecha");
+
+  if (!formulario || !tipoDocumento || !inputDocumento || !mensajeValidacion || !inputFechaNacimiento || !mensajeFecha) {
+    console.error("Falta un ID en el HTML. Revisá formularioRegistro, tipo_documento, id_unico, mensaje_validacion, fecha_nacimiento o mensaje_fecha.");
+    return;
+  }
+
+  tipoDocumento.addEventListener("change", function () {
+    limpiarYAdaptar();
+    validarDocumentoSeleccionado();
+  });
+
+  inputDocumento.addEventListener("input", function () {
+    validarDocumentoSeleccionado();
+  });
+
+  inputFechaNacimiento.addEventListener("change", function () {
+    validarMayorDeEdad();
+  });
+
+  formulario.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (!validarMayorDeEdad()) {
+      inputFechaNacimiento.focus();
+      return;
+    }
+
+    const valido = validarDocumentoSeleccionado();
+
+    if (!valido) {
+      inputDocumento.focus();
+      return;
+    }
+
+    const valorDocumento = inputDocumento.value.trim();
+
+    if (documentoYaRegistrado(valorDocumento)) {
+      mostrarMensaje("Esta identificación ya fue registrada anteriormente.", "red");
+      inputDocumento.focus();
+      return;
+    }
+
+    guardarDocumentoRegistrado(valorDocumento);
+
+    window.location.href = "Consentimiento.html";
+  });
+
+  function limpiarYAdaptar() {
+    inputDocumento.value = "";
+    mensajeValidacion.textContent = "";
+
+    if (esCedulaNacional()) {
+      inputDocumento.placeholder = "Ej: 001-010190-0001A";
+      inputDocumento.maxLength = 16;
+    } else {
+      inputDocumento.placeholder = "Ej: 12345678";
+      inputDocumento.maxLength = 10;
+    }
+  }
+
+  function esCedulaNacional() {
+    const valor = tipoDocumento.value.toLowerCase();
+    const texto = tipoDocumento.options[tipoDocumento.selectedIndex].text.toLowerCase();
+
+    return (
+      valor.includes("identidad") ||
+      valor.includes("nacional") ||
+      texto.includes("identidad") ||
+      texto.includes("nacional")
+    );
+  }
+
+  function validarDocumentoSeleccionado() {
+    const valor = inputDocumento.value.trim();
+
+    if (valor === "") {
+      mensajeValidacion.textContent = "";
+      return false;
+    }
+
+    if (esCedulaNacional()) {
+      const resultado = validarCedulaNacionalNicaragua(valor);
+
+      if (resultado.valida) {
+        mostrarMensaje(resultado.mensaje, "green");
+        return true;
+      } else {
+        mostrarMensaje(resultado.mensaje, "red");
+        return false;
+      }
+    } else {
+      const valida = validarResidenciaNicaragua(valor);
+
+      if (valida) {
+        mostrarMensaje("Cédula de residencia válida.", "green");
+        return true;
+      } else {
+        mostrarMensaje("Cédula de residencia inválida. Debe tener entre 8 y 10 números, sin letras ni guiones.", "red");
+        return false;
+      }
+    }
+  }
+
+  function mostrarMensaje(texto, color) {
+    mensajeValidacion.textContent = texto;
+    mensajeValidacion.style.color = color;
+  }
+
+  function validarMayorDeEdad() {
+    const valorFecha = inputFechaNacimiento.value;
+
+    if (valorFecha === "") {
+      mostrarMensajeFecha("La fecha de nacimiento es obligatoria.", "red");
+      return false;
+    }
+
+    const fechaNacimiento = new Date(valorFecha + "T00:00:00");
+    const hoy = new Date();
+
+    if (fechaNacimiento > hoy) {
+      mostrarMensajeFecha("La fecha de nacimiento no puede ser futura.", "red");
+      return false;
+    }
+
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const diferenciaMes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+    if (
+      diferenciaMes < 0 ||
+      (diferenciaMes === 0 && hoy.getDate() < fechaNacimiento.getDate())
+    ) {
+      edad--;
+    }
+
+    if (edad < 18) {
+      mostrarMensajeFecha("El participante debe ser mayor de 18 años.", "red");
+      return false;
+    }
+
+    mostrarMensajeFecha("Edad válida. Participante mayor de 18 años.", "green");
+    return true;
+  }
+
+  function mostrarMensajeFecha(texto, color) {
+    mensajeFecha.textContent = texto;
+    mensajeFecha.style.color = color;
+  }
+
+  function establecerFechaMaximaMayor18() {
+    const hoy = new Date();
+
+    const fechaMaxima = new Date(
+      hoy.getFullYear() - 18,
+      hoy.getMonth(),
+      hoy.getDate()
+    );
+
+    const anio = fechaMaxima.getFullYear();
+    const mes = String(fechaMaxima.getMonth() + 1).padStart(2, "0");
+    const dia = String(fechaMaxima.getDate()).padStart(2, "0");
+
+    inputFechaNacimiento.max = `${anio}-${mes}-${dia}`;
+  }
+
+  const RANGOS_CODIGOS_NICARAGUA = [
+    { departamento: "Managua", min: 1, max: 18 },
+    { departamento: "Carazo", min: 41, max: 48 },
+    { departamento: "Chinandega", min: 81, max: 92 },
+    { departamento: "Granada", min: 221, max: 224 },
+    { departamento: "León", min: 281, max: 291 },
+    { departamento: "Estelí", min: 321, max: 325 },
+    { departamento: "Nueva Segovia", min: 361, max: 374 },
+    { departamento: "Masaya", min: 401, max: 409 },
+    { departamento: "Matagalpa", min: 441, max: 465 },
+    { departamento: "RAAN / Caribe Norte", min: 521, max: 533 },
+    { departamento: "RAAS / Caribe Sur", min: 561, max: 573 }
+  ];
+
+  function obtenerDepartamentoPorCodigo(codigoTexto) {
+    const codigoNumero = parseInt(codigoTexto, 10);
+
+    for (const rango of RANGOS_CODIGOS_NICARAGUA) {
+      if (codigoNumero >= rango.min && codigoNumero <= rango.max) {
+        return rango.departamento;
+      }
+    }
+
+    return null;
+  }
+
+  function validarCedulaNacionalNicaragua(cedula) {
+    const texto = cedula.trim().toUpperCase();
+    const cedulaLimpia = texto.replace(/[\s-]/g, "");
+
+    if (!/^\d{13}[A-HJ-NP-Y]$/.test(cedulaLimpia)) {
+      return {
+        valida: false,
+        mensaje: "Formato inválido. Debe tener 13 números y una letra final. No se permite I, O ni Z."
+      };
+    }
+
+    const codigoMunicipio = cedulaLimpia.substring(0, 3);
+    const departamento = obtenerDepartamentoPorCodigo(codigoMunicipio);
+
+    if (!departamento) {
+      return {
+        valida: false,
+        mensaje: "Código inválido. Los primeros 3 dígitos no están dentro de los rangos permitidos."
+      };
+    }
+
+    const fecha = cedulaLimpia.substring(3, 9);
+    const dia = parseInt(fecha.substring(0, 2), 10);
+    const mes = parseInt(fecha.substring(2, 4), 10);
+    const anioCorto = parseInt(fecha.substring(4, 6), 10);
+
+    if (!fechaNacimientoValida(dia, mes, anioCorto)) {
+      return {
+        valida: false,
+        mensaje: "La fecha dentro de la cédula no es válida."
+      };
+    }
+
+    return {
+      valida: true,
+      mensaje: "Cédula nacional válida. Código " + codigoMunicipio + " pertenece a " + departamento + "."
+    };
+  }
+
+  function fechaNacimientoValida(dia, mes, anioCorto) {
+    if (mes < 1 || mes > 12) return false;
+    if (dia < 1 || dia > 31) return false;
+
+    const anioActual = new Date().getFullYear();
+    const ultimosDos = anioActual % 100;
+
+    const anio = anioCorto <= ultimosDos
+      ? 2000 + anioCorto
+      : 1900 + anioCorto;
+
+    const fecha = new Date(anio, mes - 1, dia);
+
+    return (
+      fecha.getFullYear() === anio &&
+      fecha.getMonth() === mes - 1 &&
+      fecha.getDate() === dia
+    );
+  }
+
+  function validarResidenciaNicaragua(residencia) {
+    const texto = residencia.trim();
+
+    return /^\d{8,10}$/.test(texto);
+  }
+
+  function normalizarDocumento(documento) {
+    return documento.trim().toUpperCase().replace(/[\s-]/g, "");
+  }
+
+  function documentoYaRegistrado(documento) {
+    const documentoNormalizado = normalizarDocumento(documento);
+    const documentosGuardados = JSON.parse(localStorage.getItem("documentosRegistrados")) || [];
+
+    return documentosGuardados.includes(documentoNormalizado);
+  }
+
+  function guardarDocumentoRegistrado(documento) {
+    const documentoNormalizado = normalizarDocumento(documento);
+    const documentosGuardados = JSON.parse(localStorage.getItem("documentosRegistrados")) || [];
+
+    documentosGuardados.push(documentoNormalizado);
+
+    localStorage.setItem("documentosRegistrados", JSON.stringify(documentosGuardados));
+  }
+
+  establecerFechaMaximaMayor18();
+  limpiarYAdaptar();
+});
+</script>
 
 </body>
 
@@ -142,10 +423,9 @@
         align-items: center;
     }
 
-    /* Estilo específico para el ícono de persona */
     .avatar-superior .material-symbols-outlined {
         font-size: 65px;
-        color: #D9F5F0; /* Tono a juego con el fondo */
+        color: #D9F5F0; 
         background-color: var(--azul-oscuro);
         width: 100%;
         height: 100%;
@@ -272,4 +552,17 @@
         margin-top: 20px;
         border-radius: 1px;
     }
+
+    .mensaje-validacion {
+  display: block;
+  width: 100%;
+  min-height: 20px;
+  margin-top: 8px;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+}
+  
   </style>
+</html>
