@@ -8,18 +8,12 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Georama:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pliant:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
   </style>
-<<<<<<< HEAD
-//fuente de titulo y subtitulo 
-=======
-
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-
-  <div class="contenedor-principal">
-    <div class="tarjeta-registro">
+<div class="tarjeta-registro">
       
       <div class="avatar-superior">
         <span class="material-symbols-outlined">account_circle</span>
@@ -27,59 +21,41 @@
 
       <h2>Registro de Participante</h2>
       
-<<<<<<< HEAD
       <form id="formularioRegistro">
-=======
-      <form id="formularioRegistro" action="guardar_datos.php" method="post">
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
         
         <div class="grupo-input">
           <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Nombre completo" required>
         </div>
 
-<<<<<<< HEAD
         <div class="grupo-input">
           <input type="email" id="email" name="email" placeholder="Correo electrónico (ejemplo@uamv.edu.ni)" required>
         </div>
 
-=======
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
         <div class="fila-inputs">
           <div class="grupo-input">
             <label for="fecha_nacimiento">Fecha de nacimiento</label>
             <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
           </div>
           <div class="grupo-input">
-<<<<<<< HEAD
             <label for="ocupacion">Ocupación / Estudios</label>
-            <input type="text" id="ocupacion" name="ocupacion" placeholder="Ej: Estudiante, Psicólogo" required>
-=======
-            <label for="nivel_estudios">Nivel de estudios</label>
-            <select id="nivel_estudios" name="nivel_estudios" required>
-              <option value="" disabled selected>Selecciona nivel...</option>
-              <option value="primaria">Primaria</option>
-              <option value="secundaria">Secundaria</option>
-              <option value="tecnico">Técnico</option>
-              <option value="universitario">Universitario</option>
-              <option value="posgrado">Posgrado</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="fila-inputs">
-          <div class="grupo-input">
-            <label for="inicio_sesion">Inicio de sesión</label>
-            <input type="datetime-local" id="inicio_sesion" name="inicio_sesion" required>
-          </div>
-          <div class="grupo-input">
-            <label for="fin_sesion">Fin de sesión</label>
-            <input type="datetime-local" id="fin_sesion" name="fin_sesion" required>
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
+            <input type="text" id="ocupacion" name="ocupacion" placeholder="Ej: Estudiante" required>
           </div>
         </div>
 
         <div class="grupo-input">
-<<<<<<< HEAD
+          <label for="nivel_estudios">Nivel de estudios</label>
+          <select id="nivel_estudios" name="nivel_estudios" required>
+            <option value="" disabled selected>Selecciona tu nivel académico...</option>
+            <option value="primaria">Primaria</option>
+            <option value="secundaria">Secundaria</option>
+            <option value="tecnico">Técnico</option>
+            <option value="universitario">Universitario</option>
+            <option value="posgrado">Posgrado</option>
+          </select>
+        </div>
+
+        <div class="grupo-input">
+          <label for="tipo_documento">Tipo de Documento</label>
           <select id="tipo_documento" name="tipo_documento" required onchange="limpiarYAdaptar()">
             <option value="cedula_identidad" selected>Cédula de Identidad</option>
             <option value="cedula_residencia">Cédula de Residencia</option>
@@ -94,41 +70,19 @@
             placeholder="Ingrese la cédula (001-000000-0000A)" 
             required
           >
-          <p id="mensaje_validacion" style="font-size: 13px; margin-top: 5px; font-weight: bold;"></p>
-=======
-          <input type="text" id="id_unico" name="id_unico" placeholder="Identificador único en BD" required>
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
+          <p id="mensaje_validacion" style="font-size: 13px; margin-top: 5px; font-weight: bold; min-height: 20px; text-align: left;"></p>
         </div>
 
         <button type="submit" class="btn-guardar">Registrar y Continuar</button>
       </form>
 
       <div class="acciones-paciente">
-<<<<<<< HEAD
         <button type="button" class="btn-secundario" onclick="document.getElementById('formularioRegistro').reset(); document.getElementById('mensaje_validacion').textContent='';">Limpiar campos</button>
-=======
-        <button type="button" class="btn-secundario" onclick="document.getElementById('formularioRegistro').reset();">Limpiar campos</button>
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
         <button type="button" class="btn-secundario">Volver al inicio</button>
       </div>
 
-    </div>
-  </div>
+    </div> ```
 
-<<<<<<< HEAD
-=======
-  <script>
-    document.getElementById('formularioRegistro').addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que intente abrir "guardar_datos.php" si no lo tienes configurado aún
-        
-        // Si llega a este punto, significa que todos los campos 'required' ya fueron llenados correctamente.
-  window.location.href = 'Consentimiento.html'; 
-    });
-  </script>
-
-</body>
-
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
   <style>
     :root {
       --celeste-pastel: #2CACAD; 
@@ -187,16 +141,9 @@
         align-items: center;
     }
 
-<<<<<<< HEAD
     .avatar-superior .material-symbols-outlined {
         font-size: 65px;
         color: #D9F5F0; 
-=======
-    /* Estilo específico para el ícono de persona */
-    .avatar-superior .material-symbols-outlined {
-        font-size: 65px;
-        color: #D9F5F0; /* Tono a juego con el fondo */
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
         background-color: var(--azul-oscuro);
         width: 100%;
         height: 100%;
@@ -323,7 +270,6 @@
         margin-top: 20px;
         border-radius: 1px;
     }
-<<<<<<< HEAD
   </style>
 
   <script>
@@ -335,7 +281,7 @@
   tipoDocumento.addEventListener('change', limpiarYAdaptar);
 
   formulario.addEventListener('submit', function(event) {
-    event.preventDefault(); // Detiene recarga o envíos alternos
+    event.preventDefault(); 
 
     const documentoValido = validarDocumentoSeleccionado();
 
@@ -344,7 +290,6 @@
       return;
     }
 
-    // ENLACE DIRECTO CON TU SERVLET API DE OPENXAVA
     const datosParticipante = {
         nombreCompleto: document.getElementById("nombre_completo").value.trim(),
         email: document.getElementById("email").value.trim(),
@@ -352,11 +297,11 @@
         idUnico: inputDocumento.value.trim(),
         fechaNacimiento: document.getElementById("fecha_nacimiento").value,
         ocupacion: document.getElementById("ocupacion").value.trim(),
-        respuestas: "" // Se enviará vacío en el registro inicial
+        nivelEstudios: document.getElementById("nivel_estudios").value,
+        respuestas: "" 
     };
 
-    // Endpoint local de tu Tomcat en OpenXava
-    const URL_API = "http://localhost:8080/Comprensi-n-Verbal/api/participante/guardar";
+const URL_API = "http://localhost:8080/ComprensionVerbalG6/api/participante/guardar";
 
     fetch(URL_API, {
         method: "POST",
@@ -371,10 +316,24 @@
         }
         throw new Error("Error en la persistencia del servidor.");
     })
-    .then(data => {
+  .then(data => {
         console.log("Éxito en OpenXava:", data);
-        alert("¡Registro exitoso! Redireccionando al test...");
-        window.location.href = 'Consentimiento.html'; // Pasa al test
+        
+        // Alerta moderna y animada
+        Swal.fire({
+            title: '¡Registro Exitoso!',
+            text: 'Redireccionando al consentimiento del test...',
+            icon: 'success',
+            iconColor: '#2CACAD', // Tu celeste pastel
+            confirmButtonColor: '#1C4EA7', // Tu azul oscuro
+            background: '#ffffff',
+            borderRadius: '25px',
+            timer: 2500, // Se cierra sola tras 2.5 segundos
+            timerProgressBar: true
+        }).then(() => {
+            // Cuando la alerta termine o la cierren, redirige automáticamente
+            window.location.href = 'Consentimiento.html'; 
+        });
     })
     .catch(error => {
         console.error("Error detectado:", error);
@@ -392,8 +351,13 @@
       inputDocumento.maxLength = 16;
     } else {
       inputDocumento.placeholder = "Ej: 00101019000012";
-      inputDocumento.maxLength = 14; // Limitado a la longitud estricta del módulo 11
+      inputDocumento.maxLength = 14; 
     }
+  }
+
+  function mostrarMensaje(texto, color) {
+    mensajeValidacion.textContent = texto;
+    mensajeValidacion.style.color = color;
   }
 
   function validarDocumentoSeleccionado() {
@@ -424,7 +388,6 @@
     }
   }
 
-  // ALGORITMOS MATEMÁTICOS DE SEPARACIÓN ABSOLUTA
   function validarCedulaNicaragua(cedula) {
       const regexEstructuraNica = /^\d{3}-?\d{6}-?\d{4}[A-Y]$/i;
       return regexEstructuraNica.test(cedula.trim());
@@ -457,7 +420,6 @@
       return digitoEsperado === verificador;
   }
 
-  // Monitoreo en tiempo real al escribir
   inputDocumento.addEventListener("input", function() {
       if (this.value.trim() === "") {
           mensajeValidacion.textContent = "";
@@ -467,7 +429,6 @@
       validarDocumentoSeleccionado();
   });
 
-  // Candado para bloquear viajeros del tiempo (Años futuros)
   window.addEventListener("DOMContentLoaded", () => {
       const inputFecha = document.getElementById("fecha_nacimiento");
       const hoy = new Date();
@@ -479,9 +440,4 @@
   </script>
 
 </body>
-
-  
 </html>
-=======
-  </style>
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
