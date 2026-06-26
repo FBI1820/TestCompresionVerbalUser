@@ -10,17 +10,217 @@
   </style>
   
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<style>
+    :root {
+      --celeste-pastel: #2CACAD; 
+      --celeste-principal: #7ed8ff; 
+      --azul-oscuro: #1C4EA7; 
+      --blanco: #ffffff;
+      --texto-oscuro: #024D60; 
+      --texto-suave: #666666;
+      --fondo-pregunta: #f4fbfb;
+      --fondo-instrucciones: #F0FBF9; 
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pliant', sans-serif; }
+body {
+    display: flex !important;
+    flex-direction: column !important; /* Cambia el eje principal a vertical */
+    align-items: center !important;    /* Centra el contenedor blanco en la pantalla */
+    justify-content: flex-start !important;
+    overflow-y: auto !important;       /* Permite el scroll vertical normal */
+    overflow-x: hidden !important;     /* Elimina el scroll horizontal molesto */
+}
+
+#contenedor-preguntas, .preguntas-container, .contenedor-test {
+    display: flex !important;
+    flex-direction: column !important; 
+    width: 100% !important;            /* Ocupa el ancho completo disponible */
+    max-width: 850px !important;       /* Evita que se estiren de forma infinita en pantallas grandes */
+    gap: 25px !important;              /* Mantiene la separación vertical entre tarjetas */
+}
+
+    /* Estilos del Cronómetro Flotante */
+    .cronometro-flotante {
+        position: fixed; top: 20px; right: 20px; background-color: var(--blanco);
+        border: 2px solid var(--azul-oscuro); border-radius: 25px; padding: 10px 20px;
+        display: flex; align-items: center; gap: 15px; box-shadow: 0 5px 15px rgba(28, 78, 167, 0.2);
+        z-index: 1000; font-family: 'Nunito', sans-serif;
+    }
+    .tiempo-texto { font-size: 20px; font-weight: 800; color: var(--azul-oscuro); min-width: 65px; text-align: center; }
+    .btn-toggle-tiempo { background: none; border: none; cursor: pointer; color: var(--texto-suave); display: flex; align-items: center; justify-content: center; transition: color 0.2s; }
+    .btn-toggle-tiempo:hover { color: var(--azul-oscuro); }
+
+    /* Estilos del Contenedor del Test (¡Corregido aquí!) */
+    .contenedor-test {
+        display: flex !important;
+        flex-direction: column !important; /* Fuerza el flujo vertical de arriba hacia abajo */
+        align-items: center !important;   /* Centra todo el contenido */
+        max-width: 850px !important;      /* Ancho máximo cómodo para leer */
+        margin: 60px auto !important;     /* Centra el contenedor completo en la pantalla */
+        width: 100% !important;            /* Asegura que sea responsive */
+        padding: 50px 30px !important;
+        background-color: var(--blanco);  /* Fondo blanco para que salgan las tarjetas encima */
+        border-radius: 35px;
+    }
+
+    .cabecera-test { text-align: center; margin-bottom: 40px; border-bottom: 2px dashed var(--celeste-pastel); padding-bottom: 20px; width: 100%; }
+    .cabecera-test h1 { font-family: 'Nunito', sans-serif; color: var(--azul-oscuro); font-size: 32px; font-weight: 900; margin-bottom: 10px; }
+    .cabecera-test p { font-family: 'Georama', sans-serif; color: var(--texto-suave); font-size: 16px; }
+
+    /* NUEVO DISEÑO PREMIUM PARA LAS INSTRUCCIONES SUPERIORES */
+    .instrucciones-test {
+        width: 100%;
+        margin: 20px 0 35px 0;
+        padding: 20px;
+        background-color: var(--fondo-instrucciones);
+        border-left: 5px solid var(--celeste-pastel);
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(44, 172, 173, 0.08);
+    }
+    .alerta-tiempo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-align: left;
+    }
+    .icono-reloj {
+        font-size: 32px !important;
+        color: var(--azul-oscuro);
+        background-color: #D9F5F0;
+        padding: 10px;
+        border-radius: 50%;
+        animation: pulso 2s infinite ease-in-out;
+    }
+    .alerta-tiempo p {
+        font-family: 'Georama', sans-serif;
+        color: var(--texto-oscuro);
+        font-size: 15px;
+        line-height: 1.5;
+    }
+    .alerta-tiempo strong {
+        color: var(--azul-oscuro);
+        font-weight: 700;
+    }
+
+    /* Animación de pulso sutil para el icono del reloj */
+    @keyframes pulso {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(28, 78, 167, 0.2); }
+        50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(28, 78, 167, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(28, 78, 167, 0); }
+    }
+    
+    /* Contenedor principal que agrupa todas las tarjetas */
+    #contenedor-preguntas, .preguntas-container {
+        display: flex !important;
+        flex-direction: column !important; /* Obliga a las preguntas a apilarse verticalmente */
+        width: 100% !important;           /* Ocupa todo el ancho disponible */
+        gap: 30px !important;              /* Espaciado perfecto entre cada tarjeta */
+        margin-top: 30px !important;
+    }
+
+    /* Este es el estilo para CADA CUADRO de pregunta individual */
+    .pregunta-card {
+        display: block !important;         /* Evita comportamiento flex horizontal interno */
+        background-color: #ffffff !important;       /* Fondo blanco limpio */
+        border: 1px solid rgba(44, 172, 173, 0.3) !important; /* Borde celeste suave pulido */
+        border-radius: 25px !important;             /* Esquinas redondeadas elegantes */
+        padding: 30px !important;                   /* Espacio interno para el texto */
+        box-shadow: 0 6px 18px rgba(2, 77, 96, 0.06) !important; /* Sombra sutil para profundidad */
+        width: 100% !important;                     /* Ancho completo del cuadro */
+        box-sizing: border-box !important;          /* Importante para el padding */
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Efecto hover suave para la tarjeta */
+    .pregunta-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 22px rgba(44, 172, 173, 0.15) !important;
+    }
+
+    /* Enunciado principal de la pregunta */
+    .enunciado, .pregunta-texto, .enunciado-pregunta {
+      font-family: 'Nunito', sans-serif;
+      color: var(--texto-oscuro);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* Contenedor de las respuestas */
+    .opciones, .opciones-lista, .opciones-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Cada fila de opción individual */
+    .opcion-label, .opcion-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: var(--texto-suave);
+      font-size: 16px;
+      line-height: 1.4;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 12px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .opcion-label:hover, .opcion-item:hover {
+      background-color: rgba(44, 172, 173, 0.08);
+      color: #000000;
+    }
+
+    /* Estilo para los botones circulares radio */
+    .opcion-label input[type="radio"], .opcion-item input[type="radio"] {
+      margin-top: 4px;
+      accent-color: var(--azul-oscuro);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .opcion-letra {
+      font-weight: bold;
+      margin-right: 4px;
+    }
+
+    .submit-container {
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    /* Botón Finalizar Test */
+    .btn-finalizar { 
+      font-family: 'Nunito', sans-serif; 
+      background-color: var(--azul-oscuro); 
+      color: white; 
+      border: none; 
+      padding: 18px 40px; 
+      font-size: 1.2rem; 
+      font-weight: bold; 
+      border-radius: 30px; 
+      cursor: pointer; 
+      transition: all 0.2s ease; 
+      display: block; 
+      width: 100%; 
+    }
+    .btn-finalizar:hover { background-color: #12367a; box-shadow: 0 8px 20px rgba(28, 78, 167, 0.3); }
+    .btn-finalizar:active { transform: scale(0.98); }
+</style>
 
   </head>
 <body>
 
   <div class="cronometro-flotante">
     <span class="material-symbols-outlined" style="color: var(--azul-oscuro);">timer</span>
-    <div class="tiempo-texto" id="displayTiempo">15:00</div>
-    <button type="button" class="btn-toggle-tiempo" id="btnToggleTiempo" title="Ocultar/Mostrar tiempo">
-        <span class="material-symbols-outlined" id="iconoOjo">visibility_off</span>
+    <div id="tiempo" class="tiempo-texto">15:00</div>
+    <button id="btn-toggle" class="btn-toggle-tiempo" title="Ocultar/Mostrar tiempo">
+        <span class="material-symbols-outlined">visibility</span>
     </button>
-  </div>
+</div>
 
   <div class="contenedor-test">
     <div class="cabecera-test">
@@ -28,17 +228,13 @@
       <p>Seleccione la interpretación que mejor se adapte a cada frase.</p>
     </div>
 
-    <div class="instrucciones">
-      <span class="material-symbols-outlined">timer</span>
-<<<<<<< HEAD
-      <strong>Dispondrá de 15 minutos.</strong> Procure hacer el máximo de ejercicios trabajando lo más rápidamente que pueda. Todas las preguntas son obligatorias.
-    </div>
+  <div class="instrucciones-test">
+  <div class="alerta-tiempo">
+    <span class="material-symbols-outlined icono-reloj">alarm</span>
+    <p>Dispondrá de <strong>15 minutos</strong>. Procure hacer el máximo de ejercicios trabajando lo más rápidamente que pueda. Todas las preguntas son obligatorias.</p>
+  </div>
+</div>
 
-    <form id="formularioTest" action="resultados.html" method="get">
-     
-
-      <button type="submit" class="btn-finalizar">Finalizar y Ver Resultados</button>
-=======
       <span><strong>Dispondrá de 15 minutos.</strong> Procure hacer el máximo de ejercicios trabajando lo más rápidamente que pueda. Todas las preguntas son obligatorias.</span>
     </div>
 
@@ -493,238 +689,155 @@
              
       </div>
 
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
     </form>
   </div>
   
-  <style>
-<<<<<<< HEAD
-=======
-    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Georama:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Pliant:ital,wght@0,100..900;1,100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
 
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
-    :root {
-      --celeste-pastel: #2CACAD; 
-      --celeste-principal: #7ed8ff; 
-      --azul-oscuro: #1C4EA7; 
-      --blanco: #ffffff;
-      --texto-oscuro: #024D60; 
-      --texto-suave: #666666;
-<<<<<<< HEAD
-      --fondo-pregunta: #f4fbfb;
+function procesarYEnviarFormulario() {
+    // 1. Obtener el ID del participante
+    const participanteId = localStorage.getItem('participanteId') || 1; 
+
+    // 2. Recolectar las 30 respuestas dinámicamente
+    const respuestasPaquete = [];
+    for (let i = 1; i <= 30; i++) {
+        const inputSeleccionado = document.querySelector(`input[name="p${i}"]:checked`);
+        respuestasPaquete.push({
+            numeroPregunta: i,
+            letraOpcion: inputSeleccionado ? inputSeleccionado.value : "-"
+        });
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pliant', sans-serif; }
-=======
-      --fondo-pregunta: #e8f7f5;
-    }
+    // 3. Estructurar el JSON final
+    const payload = {
+        participanteId: parseInt(participanteId), 
+        testId: 1, 
+        respuestas: respuestasPaquete
+    };
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Lato', sans-serif; }
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
-
-    body {
-        background-color: var(--celeste-pastel); 
-        display: flex; justify-content: center; align-items: flex-start; 
-        min-height: 100vh; padding: 40px 20px;
-    }
-
-    /* Estilos del Cronómetro Flotante */
-    .cronometro-flotante {
-        position: fixed; top: 20px; right: 20px; background-color: var(--blanco);
-        border: 2px solid var(--azul-oscuro); border-radius: 25px; padding: 10px 20px;
-        display: flex; align-items: center; gap: 15px; box-shadow: 0 5px 15px rgba(28, 78, 167, 0.2);
-        z-index: 1000; font-family: 'Nunito', sans-serif;
-    }
-    .tiempo-texto { font-size: 20px; font-weight: 800; color: var(--azul-oscuro); min-width: 65px; text-align: center; }
-    .btn-toggle-tiempo { background: none; border: none; cursor: pointer; color: var(--texto-suave); display: flex; align-items: center; justify-content: center; transition: color 0.2s; }
-    .btn-toggle-tiempo:hover { color: var(--azul-oscuro); }
-
-    /* Estilos del Contenedor del Test */
-    .contenedor-test {
-        width: 100%; max-width: 800px; background-color: var(--blanco);
-        border-radius: 35px; padding: 50px 40px; box-shadow: 0 15px 35px rgba(28, 78, 167, 0.15); 
-<<<<<<< HEAD
-        margin-top: 60px; /* Margen para que no choque con el cronómetro */
-=======
-        margin-top: 60px;
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
-    }
-
-    .cabecera-test { text-align: center; margin-bottom: 40px; border-bottom: 2px dashed var(--celeste-pastel); padding-bottom: 20px; }
-    .cabecera-test h1 { font-family: 'Nunito', sans-serif; color: var(--azul-oscuro); font-size: 32px; font-weight: 900; margin-bottom: 10px; }
-    .cabecera-test p { font-family: 'Georama', sans-serif; color: var(--texto-suave); font-size: 16px; }
-<<<<<<< HEAD
-    .instrucciones { background-color: #fff3cd; color: #856404; padding: 15px; border-radius: 15px; margin-bottom: 30px; font-family: 'Lato', sans-serif; font-size: 15px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    
-    /* Estilos de las preguntas */
-    .pregunta-card { background-color: var(--fondo-pregunta); border: 1px solid rgba(44, 172, 173, 0.2); border-radius: 20px; padding: 25px; margin-bottom: 25px; transition: transform 0.2s ease; }
-    .pregunta-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(44, 172, 173, 0.1); }
-    .enunciado { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 17px; color: var(--texto-oscuro); margin-bottom: 15px; line-height: 1.4; }
-    .opciones { display: flex; flex-direction: column; gap: 12px; }
-    .opcion-label { display: flex; align-items: flex-start; gap: 10px; font-family: 'Lato', sans-serif; font-size: 16px; color: var(--texto-suave); cursor: pointer; padding: 8px; border-radius: 10px; transition: background-color 0.2s; }
-    .opcion-label:hover { background-color: rgba(44, 172, 173, 0.1); color: var(--texto-oscuro); }
-    .opcion-label input[type="radio"] { margin-top: 4px; accent-color: var(--azul-oscuro); transform: scale(1.2); }
-    
-    .btn-finalizar { font-family: 'Sour Gummy', sans-serif; background-color: var(--azul-oscuro); color: white; border: none; padding: 18px 40px; font-size: 1.2rem; font-weight: bold; border-radius: 30px; cursor: pointer; transition: all 0.2s ease; display: block; width: 100%; margin-top: 40px; }
-=======
-    
-    .instrucciones { background-color: #fff3cd; color: #856404; padding: 15px; border-radius: 15px; margin-bottom: 30px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    
-    /* Contenedor unificado de la tarjeta de la pregunta (1 al 31) */
-    .pregunta-card, .card-pregunta {
-      background-color: var(--fondo-pregunta);
-      border-radius: 25px;
-      padding: 30px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 15px rgba(2, 77, 96, 0.05);
-    }
-
-    /* Enunciado principal de la pregunta */
-    .enunciado, .pregunta-texto, .enunciado-pregunta {
-      font-family: 'Nunito', sans-serif;
-      color: var(--texto-oscuro);
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    /* Contenedor de las respuestas */
-    .opciones, .opciones-lista, .opciones-container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    /* Cada fila de opción individual */
-    .opcion-label, .opcion-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      color: #444444;
-      font-size: 16px;
-      line-height: 1.4;
-      cursor: pointer;
-      padding: 8px 12px;
-      border-radius: 12px;
-      transition: background-color 0.2s ease;
-    }
-
-    .opcion-label:hover, .opcion-item:hover {
-      background-color: rgba(44, 172, 173, 0.08);
-      color: #000000;
-    }
-
-    /* Estilo para los botones circulares radio */
-    .opcion-label input[type="radio"], .opcion-item input[type="radio"] {
-      margin-top: 4px;
-      accent-color: var(--azul-oscuro);
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-    }
-
-    .opcion-letra {
-      font-weight: bold;
-      margin-right: 4px;
-    }
-
-    .submit-container {
-      margin-top: 40px;
-    }
-
-    .btn-finalizar { 
-      font-family: 'Nunito', sans-serif; 
-      background-color: var(--azul-oscuro); 
-      color: white; 
-      border: none; 
-      padding: 18px 40px; 
-      font-size: 1.2rem; 
-      font-weight: bold; 
-      border-radius: 30px; 
-      cursor: pointer; 
-      transition: all 0.2s ease; 
-      display: block; 
-      width: 100%; 
-    }
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
-    .btn-finalizar:hover { background-color: #12367a; box-shadow: 0 8px 20px rgba(28, 78, 167, 0.3); }
-    .btn-finalizar:active { transform: scale(0.98); }
-  </style>
-
-<<<<<<< HEAD
-
-  <script>
-    let tiempoRestante = 15 * 60; // 15 minutos en segundos
-    const displayTiempo = document.getElementById('displayTiempo');
-    const btnToggle = document.getElementById('btnToggleTiempo');
-    const iconoOjo = document.getElementById('iconoOjo');
-    let tiempoOculto = false;
-
-    // Actualizar el texto del reloj
-    function actualizarDisplay() {
-        const minutos = Math.floor(tiempoRestante / 60);
-        let segundos = tiempoRestante % 60;
-        if (segundos < 10) segundos = '0' + segundos;
-
-        if (tiempoOculto) {
-            displayTiempo.innerText = "--:--";
+    // 4. Enviar los datos a tu Servidor Java (OpenXava)
+    fetch('http://localhost:8080/ComprensionVerbalG6/api/evaluacion/guardar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = 'resultado.html';
         } else {
-            displayTiempo.innerText = `${minutos}:${segundos}`;
+            alert("Error al procesar el examen en el servidor.");
+        }
+    })
+    .catch(error => {
+        console.error("Error de red:", error);
+        guardarRespuestasEnURL(); 
+        window.location.href = 'resultado.html';
+    });
+}
+
+let tiempoRestante = 15 * 60; 
+const elementoTiempo = document.getElementById('tiempo');
+const btnToggle = document.getElementById('btn-toggle');
+let tiempoVisible = true;
+let tiempoFinalizado = false;
+
+function actualizarCronometro() {
+    const minutos = Math.floor(tiempoRestante / 60);
+    const segundos = tiempoRestante % 60;
+
+    // ACTUALIZACIÓN VISUAL DEL RELOJ (¡CORREGIDO!)
+    if (elementoTiempo) {
+        elementoTiempo.textContent = `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+
+        // Alerta visual roja últimos 2 minutos
+        if (tiempoRestante <= 120) {
+            elementoTiempo.style.color = '#ff3333';
         }
     }
 
-    // Ocultar/mostrar cronómetro
-=======
-  <script>
-    let tiempoRestante = 15 * 60; 
-    let intervalo;
-    let tiempoOculto = false;
+    // CONTROL DE TIEMPO AGOTADO
+    if (tiempoRestante <= 0 && !tiempoFinalizado) {
+        tiempoFinalizado = true;
+        clearInterval(intervaloCronometro);
 
-    const displayTiempo = document.getElementById('displayTiempo');
-    const btnToggle = document.getElementById('btnToggleTiempo');
-    const iconoOjo = document.getElementById('iconoOjo');
-
-    function actualizarDisplay() {
-        const minutes = Math.floor(tiempoRestante / 60);
-        let segundos = tiempoRestante % 60;
-        if (segundos < 10) segundos = '0' + segundos;
-
-        displayTiempo.innerText = tiempoOculto ? "--:--" : `${minutes}:${segundos}`;
+        // POPUP ELEGANTE DE SWEETALERT2
+        Swal.fire({
+            title: '¡Tiempo Agotado!',
+            text: 'Tus respuestas se están enviando automáticamente al sistema.',
+            icon: 'warning',
+            iconColor: '#ff3333',
+            showConfirmButton: false, 
+            timer: 3000, 
+            timerProgressBar: true, 
+            willClose: () => {
+                bloquearYEnviarPorTiempo();
+            }
+        });
+        return;
     }
 
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
+    // DESCUENTO DEL TIEMPO (¡CORREGIDO: Ahora va antes del cierre!)
+    tiempoRestante--;
+} // <-- AQUÍ SE CERRABA CORRECTAMENTE LA FUNCIÓN (¡CORREGIDO!)
+
+function bloquearYEnviarPorTiempo() {
+    console.log("Tiempo agotado. Guardando respuestas automáticamente...");
+
+    const contenedor = document.querySelector('.contenedor-test');
+    if (contenedor) {
+        contenedor.style.pointerEvents = 'none';
+        contenedor.style.opacity = '0.7';
+    }
+
+    guardarRespuestasEnURL();
+    procesarYEnviarFormulario();
+}
+
+function construirURLResultado() {
+    const params = new URLSearchParams();
+    const respuestasSeleccionadas = document.querySelectorAll('input[type="radio"]:checked');
+
+    respuestasSeleccionadas.forEach(respuesta => {
+        params.append(respuesta.name, respuesta.value);
+    });
+
+    return `resultado.html?${params.toString()}`;
+}
+
+function guardarRespuestasEnURL() {
+    const respuestas = {};
+    const respuestasSeleccionadas = document.querySelectorAll('input[type="radio"]:checked');
+
+    respuestasSeleccionadas.forEach(respuesta => {
+        respuestas[respuesta.name] = respuesta.value;
+    });
+
+    localStorage.setItem('respuestasTest', JSON.stringify(respuestas));
+}
+
+// ARRANQUE DEL INTERVALO
+const intervaloCronometro = setInterval(actualizarCronometro, 1000);
+
+// BOTÓN PARA OCULTAR/MOSTRAR TIEMPO
+if (btnToggle) {
     btnToggle.addEventListener('click', () => {
-        tiempoOculto = !tiempoOculto;
-        iconoOjo.innerText = tiempoOculto ? 'visibility' : 'visibility_off';
-        actualizarDisplay();
-    });
+        tiempoVisible = !tiempoVisible;
+        const icono = btnToggle.querySelector('.material-symbols-outlined');
 
-<<<<<<< HEAD
-    // Cuenta regresiva
-    const intervalo = setInterval(() => {
-=======
-    intervalo = setInterval(() => {
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
-        tiempoRestante--;
-        actualizarDisplay();
-
-        if (tiempoRestante <= 0) {
-            clearInterval(intervalo);
-            alert("El tiempo ha concluido. El formulario se enviará automáticamente.");
-            document.getElementById('formularioTest').submit(); 
+        if (!tiempoVisible) {
+            elementoTiempo.style.visibility = 'hidden';
+            if (icono) icono.textContent = 'visibility_off';
+        } else {
+            elementoTiempo.style.visibility = 'visible';
+            if (icono) icono.textContent = 'visibility';
         }
-    }, 1000);
-<<<<<<< HEAD
-
-    // Evitar envío por defecto si faltan datos y redirigir a resultados
-    document.getElementById('formularioTest').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        window.location.href = 'resultados.html'; 
     });
-=======
->>>>>>> 0524f94386bc7f70bd87705570fa7821d3b2ef3a
-  </script>
+}
+</script>
 
 </body>
 </html>
+
